@@ -1,0 +1,6 @@
+framework module MetovaTestKit {
+  umbrella header "MetovaTestKit-umbrella.h"
+
+  export *
+  module * { export * }
+}
