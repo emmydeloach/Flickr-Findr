@@ -18,6 +18,7 @@ PODS:
   - OHHTTPStubs/OHPathHelpers (8.0.0)
   - OHHTTPStubs/Swift (8.0.0):
     - OHHTTPStubs/Default
+  - PureLayout (3.1.5)
   - Reachability (3.2)
 
 DEPENDENCIES:
@@ -25,6 +26,7 @@ DEPENDENCIES:
   - MetovaTestKit
   - OHHTTPStubs
   - OHHTTPStubs/Swift
+  - PureLayout
   - Reachability
 
 SPEC REPOS:
@@ -32,14 +34,16 @@ SPEC REPOS:
     - CocoaLumberjack
     - MetovaTestKit
     - OHHTTPStubs
+    - PureLayout
     - Reachability
 
 SPEC CHECKSUMS:
   CocoaLumberjack: 78b0c238666f4f58db069738ec176f4519557516
   MetovaTestKit: d4f31a0a1321f1dcb157fd0037eb1418f0557d97
   OHHTTPStubs: 9cbce6364bec557cc3439aa6bb7514670d780881
+  PureLayout: 9b4ad47b2f0388c84ff534af23d96e720c1b875a
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
 
-PODFILE CHECKSUM: a0a23c08c273cf549fcd90b875a3f4f158351e43
+PODFILE CHECKSUM: 00bfb5e17975bcb91274fd56ac752d887baa493c
 
 COCOAPODS: 1.8.4
