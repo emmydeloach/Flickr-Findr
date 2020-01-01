@@ -1,0 +1,45 @@
+PODS:
+  - CocoaLumberjack/Core (3.6.0)
+  - CocoaLumberjack/Swift (3.6.0):
+    - CocoaLumberjack/Core
+  - MetovaTestKit (2.3.1)
+  - OHHTTPStubs (8.0.0):
+    - OHHTTPStubs/Default (= 8.0.0)
+  - OHHTTPStubs/Core (8.0.0)
+  - OHHTTPStubs/Default (8.0.0):
+    - OHHTTPStubs/Core
+    - OHHTTPStubs/JSON
+    - OHHTTPStubs/NSURLSession
+    - OHHTTPStubs/OHPathHelpers
+  - OHHTTPStubs/JSON (8.0.0):
+    - OHHTTPStubs/Core
+  - OHHTTPStubs/NSURLSession (8.0.0):
+    - OHHTTPStubs/Core
+  - OHHTTPStubs/OHPathHelpers (8.0.0)
+  - OHHTTPStubs/Swift (8.0.0):
+    - OHHTTPStubs/Default
+  - Reachability (3.2)
+
+DEPENDENCIES:
+  - CocoaLumberjack/Swift
+  - MetovaTestKit
+  - OHHTTPStubs
+  - OHHTTPStubs/Swift
+  - Reachability
+
+SPEC REPOS:
+  trunk:
+    - CocoaLumberjack
+    - MetovaTestKit
+    - OHHTTPStubs
+    - Reachability
+
+SPEC CHECKSUMS:
+  CocoaLumberjack: 78b0c238666f4f58db069738ec176f4519557516
+  MetovaTestKit: d4f31a0a1321f1dcb157fd0037eb1418f0557d97
+  OHHTTPStubs: 9cbce6364bec557cc3439aa6bb7514670d780881
+  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+
+PODFILE CHECKSUM: a0a23c08c273cf549fcd90b875a3f4f158351e43
+
+COCOAPODS: 1.8.4
