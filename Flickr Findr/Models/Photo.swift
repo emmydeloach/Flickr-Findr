@@ -6,8 +6,6 @@
 //  Copyright © 2020 Emmy Rivas. All rights reserved.
 //
 
-import CocoaLumberjack
-
 class Photo {
     
     // MARK: - Properties
@@ -29,7 +27,7 @@ class Photo {
         typealias Keys = JSONKeys.Response.Photo
         
         guard let id = json[Keys.id] as? String, let title = json[Keys.title] as? String else {
-            DDLogError("Exepcted Photo properties but unexpectedly found nil")
+            DDLogDebug("Expected Photo properties but unexpectedly found nil")
             return nil
         }
         
@@ -47,7 +45,7 @@ class Photo {
         typealias Keys = JSONKeys.Response
         
         guard let photos = json[Keys.photos] as? JSON, let results = photos[Keys.photoResults] as? [JSON] else {
-            DDLogError("Exepcted Photo properties but unexpectedly found nil")
+            DDLogDebug("Expected Photo properties but unexpectedly found nil")
             return []
         }
         

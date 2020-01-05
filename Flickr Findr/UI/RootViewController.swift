@@ -6,8 +6,6 @@
 //  Copyright © 2020 Emmy Rivas. All rights reserved.
 //
 
-import CocoaLumberjack
-
 class RootViewController: UIViewController {
     
     // MARK: - Properties
@@ -36,7 +34,7 @@ class RootViewController: UIViewController {
     }
     
     // MARK: - Networking
-    // TODO: logs not showing
+
     private func fetchPopularPhotos() {
         
         DDLogDebug("Attempting to fetch popular photos...")

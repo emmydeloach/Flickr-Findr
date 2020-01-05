@@ -7,7 +7,6 @@
 //
 
 import WebKit
-import CocoaLumberjack
 
 typealias JSON = [String: Any]
 
@@ -34,7 +33,7 @@ class APIService {
             urlComponents.query = query(for: parameters, path: path)
             
             guard let url = urlComponents.url else {
-                DDLogError("Whoopsy daisy")
+                DDLogDebug("URL Components URL unexpectedly nil")
                 return
             }
           
@@ -46,13 +45,13 @@ class APIService {
                     
                 guard /*let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200,*/ let data = data else {
                     completion([], error)
-                    DDLogError("Error decoding response: \(error?.localizedDescription)")
+                    DDLogDebug("Error decoding response: \(error?.localizedDescription)")
                     return
                 }
 
                 do {
                     guard let json = try JSONSerialization.jsonObject(with: data, options:[]) as? JSON else {
-                        DDLogError("Error parsing JSON: \(error?.localizedDescription)")
+                        DDLogDebug("Error parsing JSON: \(error?.localizedDescription)")
                         completion([], error)
                         return
                     }
@@ -60,7 +59,7 @@ class APIService {
                     let photos = Photo.parse(using: json)
                     completion(photos, error)
                 } catch let parseError as NSError {
-                    DDLogError("Error parsing JSON: \(parseError.localizedDescription)")
+                    DDLogDebug("Error parsing JSON: \(parseError.localizedDescription)")
                     completion([], parseError)
                 }
             }
@@ -95,28 +94,34 @@ class APIService {
 extension APIService {
     
     // Default call on home screen
-    static func getPopular(_ page: Int, perPage: Int = 25, completion: @escaping ResponseHandler) {
+    static func getPopular(_ page: Int, completion: @escaping ResponseHandler) {
         
-        let params: JSON = [
-            Keys.perPage: perPage,
-            Keys.page: page,
-            Keys.format: "json",
-            Keys.noJSONCallback: 1
-        ]
-        
-        sendJSONRequest(to: Path.getPopular, parameters: params, completion: completion)
+        sendJSONRequest(
+            to: Path.getPopular,
+            parameters: parameters(with: page),
+            completion: completion
+        )
     }
     
-    static func searchPhotos(with keyword: String, page: Int, perPage: Int = 25, completion: @escaping ResponseHandler) {
+    static func searchPhotos(with keyword: String, page: Int, completion: @escaping ResponseHandler) {
         
-        let params: JSON = [
-            Keys.text: keyword,
-            Keys.perPage: perPage,
+        var params = parameters(with: page)
+        params[Keys.text] = keyword
+        
+        sendJSONRequest(
+            to: Path.search,
+            parameters: params,
+            completion: completion
+        )
+    }
+    
+    private static func parameters(with page: Int) -> JSON {
+        
+        return [
+            Keys.perPage: 25,
             Keys.page: page,
             Keys.format: "json",
             Keys.noJSONCallback: 1
         ]
-        
-        sendJSONRequest(to: Path.search, parameters: params, completion: completion)
     }
 }

@@ -48,6 +48,7 @@
 		6FCCE9DD23BD591800D75049 /* Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
 		6FCCE9F323C10D7300D75049 /* JSONKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONKeys.swift; sourceTree = "<group>"; };
 		6FCCE9F823C1101000D75049 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		6FCCE9FA23C2922B00D75049 /* flickr-findr-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "flickr-findr-Bridging-Header.h"; sourceTree = "<group>"; };
 		7E25128C81721A7120A6E4DE /* Pods-Flickr Findr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flickr Findr.debug.xcconfig"; path = "Target Support Files/Pods-Flickr Findr/Pods-Flickr Findr.debug.xcconfig"; sourceTree = "<group>"; };
 		9D1F2BCA9EF9A04BDC2FACFC /* Pods_Flickr_FindrTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Flickr_FindrTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFB46435325C1A4927CDF662 /* Pods-Flickr Findr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flickr Findr.release.xcconfig"; path = "Target Support Files/Pods-Flickr Findr/Pods-Flickr Findr.release.xcconfig"; sourceTree = "<group>"; };
@@ -112,6 +113,7 @@
 				6FAADB7D23BD3D1E0056A8A9 /* AppDelegate.swift */,
 				6FAADB8B23BD3D200056A8A9 /* Info.plist */,
 				6FCCE9F523C10FDA00D75049 /* Resources */,
+				6FCCE9FA23C2922B00D75049 /* flickr-findr-Bridging-Header.h */,
 			);
 			path = "Flickr Findr";
 			sourceTree = "<group>";
@@ -513,6 +515,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.emmyrivas.Flickr-Findr";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Flickr Findr/flickr-findr-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -531,6 +534,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.emmyrivas.Flickr-Findr";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Flickr Findr/flickr-findr-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -552,6 +556,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.emmyrivas.Flickr-FindrTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Flickr Findr/flickr-findr-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Flickr Findr.app/Flickr Findr";
@@ -574,6 +579,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.emmyrivas.Flickr-FindrTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Flickr Findr/flickr-findr-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Flickr Findr.app/Flickr Findr";
