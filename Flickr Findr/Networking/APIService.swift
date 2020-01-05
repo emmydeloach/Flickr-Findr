@@ -37,13 +37,13 @@ class APIService {
                 return
             }
           
-            dataTask = defaultSession.dataTask(with: url) { data, _, error in
+            dataTask = defaultSession.dataTask(with: url) { data, response, error in
                 
                 defer {
                     self.dataTask = nil
                 }
                     
-                guard /*let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200,*/ let data = data else {
+                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200, let data = data else {
                     completion([], error)
                     DDLogDebug("Error decoding response: \(error?.localizedDescription)")
                     return

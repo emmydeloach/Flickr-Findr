@@ -1,12 +1,12 @@
 //
-//  RootViewController.swift
+//  SearchViewController.swift
 //  Flickr Findr
 //
 //  Created by Emmy DeLoach on 1/1/20.
 //  Copyright © 2020 Emmy Rivas. All rights reserved.
 //
 
-class RootViewController: UIViewController {
+class SearchViewController: UIViewController {
     
     // MARK: - Properties
     
@@ -30,7 +30,8 @@ class RootViewController: UIViewController {
         
         super.viewDidLoad()
         
-        fetchPopularPhotos()
+//        fetchPopularPhotos()
+        searchPhotos()
     }
     
     // MARK: - Networking

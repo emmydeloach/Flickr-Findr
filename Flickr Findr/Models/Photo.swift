@@ -45,7 +45,7 @@ class Photo {
         typealias Keys = JSONKeys.Response
         
         guard let photos = json[Keys.photos] as? JSON, let results = photos[Keys.photoResults] as? [JSON] else {
-            DDLogDebug("Expected Photo properties but unexpectedly found nil")
+            DDLogDebug("Expected Photo JSON while parsing but unexpectedly found nil")
             return []
         }
         
