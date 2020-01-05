@@ -93,23 +93,20 @@ class APIService {
 
 extension APIService {
     
-    // Default call on home screen
-    static func getPopular(_ page: Int, completion: @escaping ResponseHandler) {
-        
-        sendJSONRequest(
-            to: Path.getPopular,
-            parameters: parameters(with: page),
-            completion: completion
-        )
-    }
-    
-    static func searchPhotos(with keyword: String, page: Int, completion: @escaping ResponseHandler) {
-        
+    static func fetchPhotos(with keyword: String?, page: Int, completion: @escaping ResponseHandler) {
+
+        // Show popular photos by default until user searches via keyword
+        var path = Path.getPopular
         var params = parameters(with: page)
-        params[Keys.text] = keyword
+
+        if let keyword = keyword {
+            
+            path = Path.search
+            params[Keys.text] = keyword
+        }
         
         sendJSONRequest(
-            to: Path.search,
+            to: path,
             parameters: params,
             completion: completion
         )

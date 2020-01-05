@@ -8,6 +8,11 @@
 
 class SearchViewController: UIViewController {
     
+    // MARK: - Outlets
+    
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var resultsCollectionView: UICollectionView!
+    
     // MARK: - Properties
     
     var photos: [Photo] = []
@@ -17,7 +22,7 @@ class SearchViewController: UIViewController {
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         
-        super.init(nibName: String(describing: RootViewController.self), bundle: nil)
+        super.init(nibName: String(describing: SearchViewController.self), bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -30,44 +35,42 @@ class SearchViewController: UIViewController {
         
         super.viewDidLoad()
         
-//        fetchPopularPhotos()
-        searchPhotos()
+        fetchPhotoResults(with: "gorilla")
     }
+    
+    // MARK: - Setup
+    
+    private func setUpUI() {
+        
+    }
+    
+    private func setUpSearchBar() {
+        
+        // MAke sure to reset page count on new searches
+    }
+    
+    private func setUpCollectionView() {
+        
+    }
+    
+    // MARK: - Search Bar Delegate
+    
+    // MARK: - Collection View Delegate
     
     // MARK: - Networking
 
-    private func fetchPopularPhotos() {
+    private func fetchPhotoResults(with keyword: String? = nil) {
         
-        DDLogDebug("Attempting to fetch popular photos...")
-
-        APIService.getPopular(page) { photos, error in
+        APIService.fetchPhotos(with: keyword, page: page) { photos, error in
             
             if let error = error {
                 
                 DDLogWarn("Encountered error during fetch request: \(error.localizedDescription)")
+                // TODO: Show toast on failed request
                 return
             }
             
-            DDLogDebug("Successfully fetched \(photos.count) popular results")
-            
-            self.photos = photos
-            self.page += 1
-        }
-    }
-    
-    private func searchPhotos(with keyword: String = "gorilla") {
-        
-        DDLogDebug("Attempting to search photos with keyword: \(keyword)")
-        
-        APIService.searchPhotos(with: keyword, page: page) { photos, error in
-            
-            if let error = error {
-                
-                DDLogWarn("Encountered error during search request: \(error.localizedDescription)")
-                return
-            }
-            
-            DDLogDebug("Successfully fetched \(photos.count) search results")
+            DDLogDebug("Successfully fetched \(photos.count) photo results")
             
             self.photos = photos
             self.page += 1
