@@ -43,24 +43,27 @@ class APIService {
                     self.dataTask = nil
                 }
                     
-                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200, let data = data else {
-                    completion([], error)
-                    DDLogDebug("Error decoding response: \(error?.localizedDescription)")
-                    return
-                }
+                DispatchQueue.main.async {
 
-                do {
-                    guard let json = try JSONSerialization.jsonObject(with: data, options:[]) as? JSON else {
-                        DDLogDebug("Error parsing JSON: \(error?.localizedDescription)")
+                    guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200, let data = data else {
                         completion([], error)
+                        DDLogDebug("Error decoding response: \(error?.localizedDescription)")
                         return
                     }
-                    
-                    let photos = Photo.parse(using: json)
-                    completion(photos, error)
-                } catch let parseError as NSError {
-                    DDLogDebug("Error parsing JSON: \(parseError.localizedDescription)")
-                    completion([], parseError)
+
+                    do {
+                        guard let json = try JSONSerialization.jsonObject(with: data, options:[]) as? JSON else {
+                            DDLogDebug("Error parsing JSON: \(error?.localizedDescription)")
+                            completion([], error)
+                            return
+                        }
+                        
+                        let photos = Photo.parse(using: json)
+                        completion(photos, error)
+                    } catch let parseError as NSError {
+                        DDLogDebug("Error parsing JSON: \(parseError.localizedDescription)")
+                        completion([], parseError)
+                    }
                 }
             }
             

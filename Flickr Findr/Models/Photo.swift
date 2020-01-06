@@ -9,16 +9,26 @@
 class Photo {
     
     // MARK: - Properties
-    
-    let id: String
+
     let title: String
-        
+    var image: UIImage?
+    
     // MARK: - Initialization
     
-    init(id: String, title: String) {
+    init(title: String, imageURL: URL?) {
                           
-        self.id = id
         self.title = title
+        
+        // TODO: Make this more elegant 
+        DispatchQueue.global().async {
+            
+            guard let imageURL = imageURL, let data = try? Data(contentsOf: imageURL) else { return }
+                        
+            DispatchQueue.main.async {
+            
+                self.image = UIImage(data: data)
+            }
+        }
     }
     
     @discardableResult
@@ -26,14 +36,21 @@ class Photo {
         
         typealias Keys = JSONKeys.Response.Photo
         
-        guard let id = json[Keys.id] as? String, let title = json[Keys.title] as? String else {
-            DDLogDebug("Expected Photo properties but unexpectedly found nil")
+        guard let title = json[Keys.title] as? String else {
+            DDLogDebug("Photo title found unexpectedly nil while parsing")
             return nil
         }
         
+        let imagePath = Path.imagePath(
+            photoID: json[Keys.id] as? String,
+            serverID: json[Keys.serverID] as? String,
+            farmID: json[Keys.farmID] as? Int,
+            secret: json[Keys.secret] as? String
+        )
+        
         self.init(
-            id: id,
-            title: title
+            title: title,
+            imageURL: URL(string: imagePath)
         )
     }
     

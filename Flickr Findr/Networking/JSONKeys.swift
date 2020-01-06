@@ -32,9 +32,12 @@ struct JSONKeys {
         static let messages = "messages"
         
         struct Photo {
-            
-            static let id = "id"
+
             static let title = "title"
+            static let id = "id"
+            static let serverID = "server"
+            static let farmID = "farm"
+            static let secret = "secret"
         }
     }
 }

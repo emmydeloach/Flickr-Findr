@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setUpLogger()
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = RootViewController()
+        window?.rootViewController = SearchViewController()
         window?.makeKeyAndVisible()
 
         return true

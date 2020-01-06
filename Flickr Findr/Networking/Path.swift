@@ -12,4 +12,11 @@ struct Path {
     
     static let getPopular = "flickr.photos.getPopular"
     static let search = "flickr.photos.search"
+    
+    static func imagePath(photoID: String?, serverID: String?, farmID: Int?, secret: String?) -> String {
+        
+        guard let photoID = photoID, let serverID = serverID, let farmID = farmID, let secret = secret else { return "" }
+        
+        return "https://farm\(farmID).staticflickr.com/\(serverID)/\(photoID)_\(secret).jpg"
+    }
 }
