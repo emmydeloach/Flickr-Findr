@@ -1,0 +1,124 @@
+PODS:
+  - CocoaLumberjack/Core (3.6.0)
+  - CocoaLumberjack/Swift (3.6.0):
+    - CocoaLumberjack/Core
+  - MaterialComponents/AnimationTiming (100.0.0)
+  - MaterialComponents/Buttons (100.0.0):
+    - MaterialComponents/Elevation
+    - MaterialComponents/Ink
+    - MaterialComponents/private/Math
+    - MaterialComponents/Ripple
+    - MaterialComponents/ShadowElevations
+    - MaterialComponents/ShadowLayer
+    - MaterialComponents/Shapes
+    - MaterialComponents/Typography
+    - MDFInternationalization
+    - MDFTextAccessibility
+  - MaterialComponents/Elevation (100.0.0):
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+  - MaterialComponents/Ink (100.0.0):
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+  - MaterialComponents/OverlayWindow (100.0.0):
+    - MaterialComponents/private/Application
+  - MaterialComponents/private/Application (100.0.0)
+  - MaterialComponents/private/Color (100.0.0)
+  - MaterialComponents/private/KeyboardWatcher (100.0.0):
+    - MaterialComponents/private/Application
+  - MaterialComponents/private/Math (100.0.0)
+  - MaterialComponents/private/Overlay (100.0.0)
+  - MaterialComponents/Ripple (100.0.0):
+    - MaterialComponents/AnimationTiming
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+  - MaterialComponents/ShadowElevations (100.0.0)
+  - MaterialComponents/ShadowLayer (100.0.0):
+    - MaterialComponents/ShadowElevations
+  - MaterialComponents/Shapes (100.0.0):
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+    - MaterialComponents/ShadowLayer
+  - MaterialComponents/Snackbar (100.0.0):
+    - MaterialComponents/AnimationTiming
+    - MaterialComponents/Buttons
+    - MaterialComponents/Elevation
+    - MaterialComponents/OverlayWindow
+    - MaterialComponents/private/Application
+    - MaterialComponents/private/KeyboardWatcher
+    - MaterialComponents/private/Math
+    - MaterialComponents/private/Overlay
+    - MaterialComponents/ShadowElevations
+    - MaterialComponents/ShadowLayer
+    - MaterialComponents/Typography
+  - MaterialComponents/Typography (100.0.0):
+    - MaterialComponents/private/Application
+    - MaterialComponents/private/Math
+  - MDFInternationalization (2.0.0)
+  - MDFTextAccessibility (2.0.0)
+  - MetovaTestKit (2.3.1)
+  - OHHTTPStubs (8.0.0):
+    - OHHTTPStubs/Default (= 8.0.0)
+  - OHHTTPStubs/Core (8.0.0)
+  - OHHTTPStubs/Default (8.0.0):
+    - OHHTTPStubs/Core
+    - OHHTTPStubs/JSON
+    - OHHTTPStubs/NSURLSession
+    - OHHTTPStubs/OHPathHelpers
+  - OHHTTPStubs/JSON (8.0.0):
+    - OHHTTPStubs/Core
+  - OHHTTPStubs/NSURLSession (8.0.0):
+    - OHHTTPStubs/Core
+  - OHHTTPStubs/OHPathHelpers (8.0.0)
+  - OHHTTPStubs/Swift (8.0.0):
+    - OHHTTPStubs/Default
+  - PureLayout (3.1.5)
+  - Reachability (3.2)
+  - Reusable (4.1.0):
+    - Reusable/Storyboard (= 4.1.0)
+    - Reusable/View (= 4.1.0)
+  - Reusable/Storyboard (4.1.0)
+  - Reusable/View (4.1.0)
+  - SDWebImage (5.4.1):
+    - SDWebImage/Core (= 5.4.1)
+  - SDWebImage/Core (5.4.1)
+
+DEPENDENCIES:
+  - CocoaLumberjack/Swift
+  - MaterialComponents/Snackbar
+  - MetovaTestKit
+  - OHHTTPStubs
+  - OHHTTPStubs/Swift
+  - PureLayout
+  - Reachability
+  - Reusable
+  - SDWebImage
+
+SPEC REPOS:
+  trunk:
+    - CocoaLumberjack
+    - MaterialComponents
+    - MDFInternationalization
+    - MDFTextAccessibility
+    - MetovaTestKit
+    - OHHTTPStubs
+    - PureLayout
+    - Reachability
+    - Reusable
+    - SDWebImage
+
+SPEC CHECKSUMS:
+  CocoaLumberjack: 78b0c238666f4f58db069738ec176f4519557516
+  MaterialComponents: b4cc6c1649a566d70bd72096f3e1aae2c3701e4f
+  MDFInternationalization: 010097556d6b09d2c4ea38e0820ea6d37be6a314
+  MDFTextAccessibility: 85c09a1bd9c321f494348e632a25063bcda35a53
+  MetovaTestKit: d4f31a0a1321f1dcb157fd0037eb1418f0557d97
+  OHHTTPStubs: 9cbce6364bec557cc3439aa6bb7514670d780881
+  PureLayout: 9b4ad47b2f0388c84ff534af23d96e720c1b875a
+  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  Reusable: 82be188f29d96dc5eff0db7b2393bcc08d2cdd5b
+  SDWebImage: 29c340dbdcef342bb13125553f4e19ce056b07a7
+
+PODFILE CHECKSUM: a0652f339e79b9674a333028169661f2d0245d0e
+
+COCOAPODS: 1.8.4
