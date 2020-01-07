@@ -20,6 +20,14 @@ PODS:
     - OHHTTPStubs/Default
   - PureLayout (3.1.5)
   - Reachability (3.2)
+  - Reusable (4.1.0):
+    - Reusable/Storyboard (= 4.1.0)
+    - Reusable/View (= 4.1.0)
+  - Reusable/Storyboard (4.1.0)
+  - Reusable/View (4.1.0)
+  - SDWebImage (5.4.1):
+    - SDWebImage/Core (= 5.4.1)
+  - SDWebImage/Core (5.4.1)
 
 DEPENDENCIES:
   - CocoaLumberjack/Swift
@@ -28,6 +36,8 @@ DEPENDENCIES:
   - OHHTTPStubs/Swift
   - PureLayout
   - Reachability
+  - Reusable
+  - SDWebImage
 
 SPEC REPOS:
   trunk:
@@ -36,6 +46,8 @@ SPEC REPOS:
     - OHHTTPStubs
     - PureLayout
     - Reachability
+    - Reusable
+    - SDWebImage
 
 SPEC CHECKSUMS:
   CocoaLumberjack: 78b0c238666f4f58db069738ec176f4519557516
@@ -43,7 +55,9 @@ SPEC CHECKSUMS:
   OHHTTPStubs: 9cbce6364bec557cc3439aa6bb7514670d780881
   PureLayout: 9b4ad47b2f0388c84ff534af23d96e720c1b875a
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  Reusable: 82be188f29d96dc5eff0db7b2393bcc08d2cdd5b
+  SDWebImage: 29c340dbdcef342bb13125553f4e19ce056b07a7
 
-PODFILE CHECKSUM: 00bfb5e17975bcb91274fd56ac752d887baa493c
+PODFILE CHECKSUM: 1a8a18a192ce390934f8cf3395ec1fd9dc72f3d2
 
 COCOAPODS: 1.8.4
