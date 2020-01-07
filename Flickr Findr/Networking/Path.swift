@@ -10,7 +10,7 @@ struct Path {
  
     static let baseURL = "https://www.flickr.com/services/rest/"
     
-    static let getPopular = "flickr.photos.getPopular"
+    static let getRecent = "flickr.photos.getRecent"
     static let search = "flickr.photos.search"
     
     static func imagePath(photoID: String?, serverID: String?, farmID: Int?, secret: String?) -> String {

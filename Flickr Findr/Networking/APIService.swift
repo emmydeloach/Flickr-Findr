@@ -98,8 +98,8 @@ extension APIService {
     
     static func fetchPhotos(with keyword: String?, page: Int, completion: @escaping ResponseHandler) {
 
-        // Show popular photos by default until user searches via keyword
-        var path = Path.getPopular
+        // Show recent photos by default until user searches via keyword
+        var path = Path.getRecent
         var params = parameters(with: page)
 
         if let keyword = keyword {

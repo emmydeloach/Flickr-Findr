@@ -56,6 +56,6 @@ class Photo {
             return []
         }
         
-        return results.compactMap { Photo(json: $0)}
+        return results.compactMap { Photo(json: $0) }
     }
 }

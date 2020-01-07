@@ -11,6 +11,8 @@ import SDWebImage
 
 class PhotoCollectionViewCell: UICollectionViewCell, NibReusable {
 
+    static let defaultHeight: CGFloat = 180
+    
     // MARK: - Outlets
     
     @IBOutlet weak var imageView: UIImageView!
@@ -20,7 +22,10 @@ class PhotoCollectionViewCell: UICollectionViewCell, NibReusable {
     
     func load(result: Photo) {
         
-        titleLabel.text = result.title
-        imageView.sd_setImage(with: result.imageURL, placeholderImage: nil)
+        imageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+        imageView.sd_setImage(with: result.imageURL) { _, _, _, _ in
+            
+            self.titleLabel.text = result.title
+        }
     }
 }

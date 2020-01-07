@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -13,20 +13,39 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FLICKR FINDR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ndT-MP-a5b">
-                    <rect key="frame" x="132.5" y="430.5" width="149.5" height="35"/>
-                    <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
-                    <color key="textColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PdQ-dm-Hcq">
+                    <rect key="frame" x="122.5" y="0.0" width="169.5" height="896"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FLICKR FINDR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ndT-MP-a5b">
+                            <rect key="frame" x="10" y="430.5" width="149.5" height="35"/>
+                            <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
+                            <color key="textColor" name="flickr_pink"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" name="flickr_blue"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="ndT-MP-a5b" secondAttribute="trailing" constant="10" id="1xy-0p-Ce5"/>
+                        <constraint firstItem="ndT-MP-a5b" firstAttribute="leading" secondItem="PdQ-dm-Hcq" secondAttribute="leading" constant="10" id="M4R-Pj-gRl"/>
+                        <constraint firstItem="ndT-MP-a5b" firstAttribute="centerY" secondItem="PdQ-dm-Hcq" secondAttribute="centerY" id="j7s-B9-1h4"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="ndT-MP-a5b" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Lvg-2A-PnP"/>
-                <constraint firstItem="ndT-MP-a5b" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Mqd-Ut-JWO"/>
+                <constraint firstItem="PdQ-dm-Hcq" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="QD3-Q8-BBd"/>
+                <constraint firstItem="PdQ-dm-Hcq" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="c8c-Me-iur"/>
+                <constraint firstAttribute="bottom" secondItem="PdQ-dm-Hcq" secondAttribute="bottom" id="fg9-I5-9nT"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="139" y="136"/>
         </view>
     </objects>
+    <resources>
+        <namedColor name="flickr_blue">
+            <color red="0.0" green="0.3843137254901961" blue="0.8666666666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="flickr_pink">
+            <color red="1" green="0.0" blue="0.51764705882352946" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

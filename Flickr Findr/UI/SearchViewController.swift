@@ -6,6 +6,8 @@
 //  Copyright © 2020 Emmy Rivas. All rights reserved.
 //
 
+import SDWebImage
+
 class SearchViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, ResultsLayoutDelegate, UISearchBarDelegate {
     
     // MARK: - Outlets
@@ -15,10 +17,15 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     // MARK: - Properties
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     var photos: [Photo] = [] {
         didSet {
             resultsCollectionView.reloadData()
             resultsCollectionView.isHidden = photos.isEmpty
+            scrollToTop()
         }
     }
     var page = 1
@@ -41,7 +48,13 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         super.viewDidLoad()
         
         setUpUI()
-//        fetchPhotoResults(with: "gorilla")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        super.viewDidAppear(animated)
+        
+        fetchPhotoResults()
     }
     
     // MARK: - Setup
@@ -54,7 +67,6 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     private func setUpSearchBar() {
         
-        // TODO: Make sure to reset page count on new searches
         searchBar.delegate = self
     }
     
@@ -72,11 +84,6 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     // MARK: - Search Bar Delegate
-    
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        
-        fetchPhotoResults(with: searchBar.text)
-    }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
@@ -103,9 +110,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath) -> CGFloat {
         
-        let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: PhotoCollectionViewCell.self)
-        
-        return cell.imageView.image?.size.height ?? .zero
+        return PhotoCollectionViewCell.defaultHeight
     }
     
     // MARK: - Networking
@@ -126,7 +131,14 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
             DDLogDebug("Successfully fetched \(photos.count) photo results")
             
             self.photos = photos
-            self.page += 1
+            self.page += 1 // TODO: Add paging 
         }
+    }
+    
+    // MARK: - Helpers
+    
+    private func scrollToTop() {
+        
+        resultsCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
     }
 }
