@@ -25,11 +25,9 @@ struct JSONKeys {
         static let page = "page"
         static let pages = "pages"
         static let perPage = "perpage"
-        static let total = "total"
         static let photoResults = "photo"
         static let status = "stat"
-        static let code = "code"
-        static let messages = "messages"
+        static let message = "message"
         
         struct Photo {
 
