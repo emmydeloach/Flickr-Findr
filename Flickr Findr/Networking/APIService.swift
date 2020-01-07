@@ -96,32 +96,21 @@ class APIService {
 
 extension APIService {
     
-    static func fetchPhotos(with keyword: String?, page: Int, completion: @escaping ResponseHandler) {
+    static func fetchPhotos(with keyword: String, page: Int, completion: @escaping ResponseHandler) {
 
-        // Show recent photos by default until user searches via keyword
-        var path = Path.getRecent
-        var params = parameters(with: page)
-
-        if let keyword = keyword {
-            
-            path = Path.search
-            params[Keys.text] = keyword
-        }
+        var path = Path.search
+        var params: JSON = [
+            Keys.text: keyword,
+            Keys.perPage: 25,
+            Keys.page: page,
+            Keys.format: "json",
+            Keys.noJSONCallback: 1
+        ]
         
         sendJSONRequest(
             to: path,
             parameters: params,
             completion: completion
         )
-    }
-    
-    private static func parameters(with page: Int) -> JSON {
-        
-        return [
-            Keys.perPage: 25,
-            Keys.page: page,
-            Keys.format: "json",
-            Keys.noJSONCallback: 1
-        ]
     }
 }

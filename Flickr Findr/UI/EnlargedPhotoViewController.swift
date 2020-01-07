@@ -6,20 +6,21 @@
 //  Copyright © 2020 Emmy Rivas. All rights reserved.
 //
 
-import SDWebImage // TODO: maybe switch to AlamofireImage so 
+import SDWebImage // TODO: maybe switch to AlamofireImage so
 
-class EnlargedPhotoViewController: UIViewController {
+class EnlargedPhotoViewController: UIViewController, BackgroundBlurable {
     
     // MARK: - Outlets
     
-    // TODO: Add dismiss button
+    @IBOutlet weak var dismissButton: RoundedButton!
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var titleLabel: RoundedLabel!
     
     // MARK: - Properties
     
     private let image: UIImage?
     private let subtitle: String
+    private let radius: CGFloat = 10
     
     // MARK: - Init
     
@@ -46,12 +47,26 @@ class EnlargedPhotoViewController: UIViewController {
     
     private func setUpUI() {
         
+        view.backgroundColor = .black
+        applyBackgroundBlur()
+        
         imageView.image = image
         titleLabel.text = subtitle
         
+        dismissButton.roundCorners(radius: radius)
+        titleLabel.roundCorners(radius: radius)
+        
         providesPresentationContextTransitionStyle = true
         definesPresentationContext = true
-        modalPresentationStyle = .overCurrentContext
+        modalPresentationStyle = .popover
         modalTransitionStyle = .crossDissolve
     }
+    
+    // MARK: - Actions
+    
+    @IBAction func dismissButtonTapped() {
+        
+        dismiss(animated: true)
+    }
 }
+

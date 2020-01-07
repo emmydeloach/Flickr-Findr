@@ -122,7 +122,12 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     // MARK: - Networking
 
-    private func fetchPhotoResults(with keyword: String? = nil) {
+    private func fetchPhotoResults(with keyword: String? = "Iceland") {
+        
+        guard let keyword = keyword else {
+            DDLogDebug("Keyword unexpectedly nil")
+            return
+        }
         
         DDLogDebug("Attempting to fetch photos with keyword '\(keyword)'...")
         
