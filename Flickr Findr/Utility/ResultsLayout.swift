@@ -36,8 +36,11 @@ class ResultsLayout: UICollectionViewLayout {
     
     override func prepare() {
 
-        guard cache.isEmpty, let collectionView = collectionView else { return }
+        guard let collectionView = collectionView else { return }
 
+        // Reset cached information
+        cache.removeAll()
+        
         let columnWidth = contentWidth / CGFloat(numberOfColumns)
         var xOffset: [CGFloat] = []
         for column in 0..<numberOfColumns {

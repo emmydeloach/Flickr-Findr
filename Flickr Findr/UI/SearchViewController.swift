@@ -35,6 +35,9 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         }
     }
     
+    private var page = 1
+    private var totalPages = 0
+    
     // MARK: - Init
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -107,7 +110,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         
         let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: PhotoCollectionViewCell.self)
         
-        let nearEndOfResults = indexPath.item == photos.count - 3 // Items per row
+        let nearEndOfResults = indexPath.item == photos.count - 1
         let moreResultsToFetch = totalPages > page
         if nearEndOfResults && moreResultsToFetch {
             
