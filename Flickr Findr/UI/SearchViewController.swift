@@ -7,6 +7,7 @@
 //
 
 import SDWebImage
+import MaterialComponents.MaterialSnackbar
 
 class SearchViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, ResultsLayoutDelegate, UISearchBarDelegate {
     
@@ -25,10 +26,17 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         didSet {
             resultsCollectionView.reloadData()
             resultsCollectionView.isHidden = photos.isEmpty
-            scrollToTop()
         }
     }
-    var page = 1
+    
+    private var keyword: String? {
+        didSet {
+            fetchPhotoResults()
+        }
+    }
+    
+    private var page = 1
+    private var totalPages = 0
     
     // MARK: - Init
     
@@ -50,19 +58,14 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         setUpUI()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        
-        super.viewDidAppear(animated)
-        
-        fetchPhotoResults()
-    }
-    
     // MARK: - Setup
     
     private func setUpUI() {
         
         setUpSearchBar()
         setUpCollectionView()
+        
+        keyword = Constants.defaultSearchTerm
     }
     
     private func setUpSearchBar() {
@@ -87,7 +90,13 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
-        fetchPhotoResults(with: searchBar.text)
+        // Reset counts
+        page = 1
+        totalPages = 0
+        photos = []
+        keyword = searchBar.text
+        view.endEditing(true)
+        scrollToTop()
     }
     
     // MARK: - Collection View Delegate
@@ -101,6 +110,14 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         
         let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: PhotoCollectionViewCell.self)
         
+        let nearEndOfResults = indexPath.item == photos.count - 1
+        let moreResultsToFetch = totalPages > page
+        if nearEndOfResults && moreResultsToFetch {
+            
+            DDLogInfo("Nearing end of results; fetching more")
+            fetchPhotoResults()
+        }
+                
         cell.load(
             result: photos[indexPath.item]
         )
@@ -122,7 +139,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     // MARK: - Networking
 
-    private func fetchPhotoResults(with keyword: String? = "Iceland") {
+    private func fetchPhotoResults() {
         
         guard let keyword = keyword else {
             DDLogDebug("Keyword unexpectedly nil")
@@ -131,20 +148,32 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         
         DDLogDebug("Attempting to fetch photos with keyword '\(keyword)'...")
         
-        APIService.fetchPhotos(with: keyword, page: page) { photos, error in
+        APIService.fetchPhotos(with: keyword, page: page) { responseStatus in
             
-            if let error = error {
+            switch responseStatus {
                 
-                DDLogWarn("Encountered error during fetch request: \(error.localizedDescription)")
-                // TODO: Show toast on failed request
-                return
+            case .success(let photos, let totalPages):
+                DDLogDebug("Successfully fetched \(photos.count) photo results")
+                
+                self.photos += photos
+                self.page += 1
+                self.totalPages = totalPages
+
+            case .error(let errorMessage):
+                self.showSnackBar(with: errorMessage)
             }
-            
-            DDLogDebug("Successfully fetched \(photos.count) photo results")
-            
-            self.photos = photos
-            self.page += 1 // TODO: Add paging 
         }
+    }
+    
+    // MARK: - Error Handling
+    
+    func showSnackBar(with messageText: String?) {
+      
+        MDCSnackbarManager.show(
+            MDCSnackbarMessage(
+                text: messageText ?? Constants.errorMessage
+            )
+        )
     }
     
     // MARK: - Helpers
@@ -156,8 +185,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     private func presentEnlargedPhoto(_ result: Photo) {
         
-        let imageView = UIImageView()
-        imageView.sd_setImage(with: result.imageURL) { image, _, _, _ in
+        UIImageView().sd_setImage(with: result.imageURL) { image, _, _, _ in
             
             self.present(
                 EnlargedPhotoViewController(

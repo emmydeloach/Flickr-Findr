@@ -19,7 +19,7 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search by keyword" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dtr-Pb-ygh">
+                <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search by keyword" translatesAutoresizingMaskIntoConstraints="NO" id="Dtr-Pb-ygh">
                     <rect key="frame" x="0.0" y="92" width="414" height="50"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="LXR-q0-B9W"/>

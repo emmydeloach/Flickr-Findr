@@ -9,6 +9,7 @@ target 'Flickr Findr' do
   pod 'PureLayout'
   pod 'Reusable'
   pod 'SDWebImage'
+  pod 'MaterialComponents/Snackbar'
 
   target 'Flickr FindrTests' do
 
