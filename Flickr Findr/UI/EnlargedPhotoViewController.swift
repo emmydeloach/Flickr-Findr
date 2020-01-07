@@ -6,7 +6,7 @@
 //  Copyright © 2020 Emmy Rivas. All rights reserved.
 //
 
-import SDWebImage // TODO: maybe switch to AlamofireImage so
+import SDWebImage 
 
 class EnlargedPhotoViewController: UIViewController, BackgroundBlurable {
     
@@ -18,16 +18,14 @@ class EnlargedPhotoViewController: UIViewController, BackgroundBlurable {
     
     // MARK: - Properties
     
-    private let image: UIImage?
-    private let subtitle: String
+    private let photo: Photo
     private let radius: CGFloat = 10
     
     // MARK: - Init
     
-    init(image: UIImage?, subtitle: String) {
+    init(photo: Photo) {
         
-        self.image = image
-        self.subtitle = subtitle
+        self.photo = photo
         
         super.init(nibName: String(describing: EnlargedPhotoViewController.self), bundle: nil)
     }
@@ -50,8 +48,8 @@ class EnlargedPhotoViewController: UIViewController, BackgroundBlurable {
         view.backgroundColor = .black
         applyBackgroundBlur()
         
-        imageView.image = image
-        titleLabel.text = subtitle
+        imageView.sd_setImage(with: photo.imageURL)
+        titleLabel.text = photo.title
         
         dismissButton.roundCorners(radius: radius)
         titleLabel.roundCorners(radius: radius)

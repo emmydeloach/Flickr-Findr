@@ -184,17 +184,13 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     private func presentEnlargedPhoto(_ result: Photo) {
-        
-        UIImageView().sd_setImage(with: result.imageURL) { image, _, _, _ in
-            
-            self.present(
-                EnlargedPhotoViewController(
-                    image: image,
-                    subtitle: result.title
-                ),
-                animated: true,
-                completion: nil
-            )
-        }
+                    
+        present(
+            EnlargedPhotoViewController(
+                photo: result
+            ),
+            animated: true,
+            completion: nil
+        )
     }
 }
