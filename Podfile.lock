@@ -25,6 +25,9 @@ PODS:
     - Reusable/View (= 4.1.0)
   - Reusable/Storyboard (4.1.0)
   - Reusable/View (4.1.0)
+  - SDWebImage (5.4.1):
+    - SDWebImage/Core (= 5.4.1)
+  - SDWebImage/Core (5.4.1)
 
 DEPENDENCIES:
   - CocoaLumberjack/Swift
@@ -34,6 +37,7 @@ DEPENDENCIES:
   - PureLayout
   - Reachability
   - Reusable
+  - SDWebImage
 
 SPEC REPOS:
   trunk:
@@ -43,6 +47,7 @@ SPEC REPOS:
     - PureLayout
     - Reachability
     - Reusable
+    - SDWebImage
 
 SPEC CHECKSUMS:
   CocoaLumberjack: 78b0c238666f4f58db069738ec176f4519557516
@@ -51,7 +56,8 @@ SPEC CHECKSUMS:
   PureLayout: 9b4ad47b2f0388c84ff534af23d96e720c1b875a
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   Reusable: 82be188f29d96dc5eff0db7b2393bcc08d2cdd5b
+  SDWebImage: 29c340dbdcef342bb13125553f4e19ce056b07a7
 
-PODFILE CHECKSUM: bcb05c91f29e4f15632ba299f2ccbea04dbbc6a8
+PODFILE CHECKSUM: 1a8a18a192ce390934f8cf3395ec1fd9dc72f3d2
 
 COCOAPODS: 1.8.4

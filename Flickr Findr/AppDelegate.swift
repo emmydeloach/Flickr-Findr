@@ -6,8 +6,6 @@
 //  Copyright © 2020 Emmy Rivas. All rights reserved.
 //
 
-import UIKit
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

@@ -8,6 +8,7 @@ target 'Flickr Findr' do
   pod 'Reachability'
   pod 'PureLayout'
   pod 'Reusable'
+  pod 'SDWebImage'
 
   target 'Flickr FindrTests' do
 

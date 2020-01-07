@@ -52,12 +52,12 @@
                 <constraint firstItem="7Lm-fQ-Hl0" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="9AJ-b2-TIq"/>
                 <constraint firstItem="Dtr-Pb-ygh" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="DiN-wH-JGC"/>
                 <constraint firstItem="VBX-WH-ZZz" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="FZc-fE-h3H"/>
-                <constraint firstAttribute="bottom" secondItem="xt8-Nc-RUo" secondAttribute="bottom" id="HCX-gj-raY"/>
+                <constraint firstAttribute="bottom" secondItem="xt8-Nc-RUo" secondAttribute="bottom" constant="32" id="HCX-gj-raY"/>
                 <constraint firstItem="7Lm-fQ-Hl0" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="K56-Iq-nMh"/>
                 <constraint firstItem="Dtr-Pb-ygh" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="dB9-Bc-Ojl"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="xt8-Nc-RUo" secondAttribute="trailing" id="hFc-9x-yO7"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="xt8-Nc-RUo" secondAttribute="trailing" constant="32" id="hFc-9x-yO7"/>
                 <constraint firstItem="7Lm-fQ-Hl0" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="i1v-t8-ASt"/>
-                <constraint firstItem="xt8-Nc-RUo" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="k2r-iO-W1x"/>
+                <constraint firstItem="xt8-Nc-RUo" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="32" id="k2r-iO-W1x"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="7Lm-fQ-Hl0" secondAttribute="trailing" constant="15" id="oIA-ZJ-oH4"/>
                 <constraint firstAttribute="trailing" secondItem="VBX-WH-ZZz" secondAttribute="trailing" constant="40" id="xcA-CQ-aIm"/>
             </constraints>

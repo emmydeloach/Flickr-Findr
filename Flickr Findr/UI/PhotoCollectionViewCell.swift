@@ -7,6 +7,7 @@
 //
 
 import Reusable
+import SDWebImage
 
 class PhotoCollectionViewCell: UICollectionViewCell, NibReusable {
 
@@ -19,7 +20,7 @@ class PhotoCollectionViewCell: UICollectionViewCell, NibReusable {
     
     func load(result: Photo) {
         
-        imageView.image = result.image
         titleLabel.text = result.title
+        imageView.sd_setImage(with: result.imageURL, placeholderImage: nil)
     }
 }

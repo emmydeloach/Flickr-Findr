@@ -11,24 +11,14 @@ class Photo {
     // MARK: - Properties
 
     let title: String
-    var image: UIImage?
+    var imageURL: URL?
     
     // MARK: - Initialization
     
     init(title: String, imageURL: URL?) {
                           
         self.title = title
-        
-        // TODO: Make this more elegant 
-        DispatchQueue.global().async {
-            
-            guard let imageURL = imageURL, let data = try? Data(contentsOf: imageURL) else { return }
-                        
-            DispatchQueue.main.async {
-            
-                self.image = UIImage(data: data)
-            }
-        }
+        self.imageURL = imageURL
     }
     
     @discardableResult

@@ -40,7 +40,8 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         
         super.viewDidLoad()
         
-        fetchPhotoResults(with: "gorilla")
+        setUpUI()
+//        fetchPhotoResults(with: "gorilla")
     }
     
     // MARK: - Setup
@@ -102,7 +103,9 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath) -> CGFloat {
         
-        return photos[indexPath.item].image?.size.height ?? .zero
+        let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: PhotoCollectionViewCell.self)
+        
+        return cell.imageView.image?.size.height ?? .zero
     }
     
     // MARK: - Networking
