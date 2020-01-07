@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EnlargedPhotoViewController" customModule="Flickr_Findr" customModuleProvider="target">
+            <connections>
+                <outlet property="imageView" destination="tGA-b2-SL3" id="T70-lW-Fnb"/>
+                <outlet property="titleLabel" destination="R8B-1l-8c6" id="rm4-w3-dTF"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tGA-b2-SL3">
+                    <rect key="frame" x="0.0" y="251" width="414" height="128"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R8B-1l-8c6">
+                    <rect key="frame" x="20" y="511" width="374" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="R8B-1l-8c6" firstAttribute="top" secondItem="tGA-b2-SL3" secondAttribute="bottom" constant="20" id="0mX-gz-QwX"/>
+                <constraint firstAttribute="trailing" secondItem="tGA-b2-SL3" secondAttribute="trailing" id="fc1-DS-4Wh"/>
+                <constraint firstAttribute="trailing" secondItem="R8B-1l-8c6" secondAttribute="trailing" constant="20" id="jA9-Ls-CN2"/>
+                <constraint firstItem="R8B-1l-8c6" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="qR8-5g-mgd"/>
+                <constraint firstItem="tGA-b2-SL3" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="sxR-x5-GyW"/>
+                <constraint firstItem="tGA-b2-SL3" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ube-FP-W2J"/>
+            </constraints>
+            <point key="canvasLocation" x="139" y="131"/>
+        </view>
+    </objects>
+</document>

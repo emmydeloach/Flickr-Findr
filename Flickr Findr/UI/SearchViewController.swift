@@ -113,6 +113,13 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         return PhotoCollectionViewCell.defaultHeight
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        presentEnlargedPhoto(
+            photos[indexPath.item]
+        )
+    }
+    
     // MARK: - Networking
 
     private func fetchPhotoResults(with keyword: String? = nil) {
@@ -140,5 +147,21 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     private func scrollToTop() {
         
         resultsCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
+    }
+    
+    private func presentEnlargedPhoto(_ result: Photo) {
+        
+        let imageView = UIImageView()
+        imageView.sd_setImage(with: result.imageURL) { image, _, _, _ in
+            
+            self.present(
+                EnlargedPhotoViewController(
+                    image: image,
+                    subtitle: result.title
+                ),
+                animated: true,
+                completion: nil
+            )
+        }
     }
 }
