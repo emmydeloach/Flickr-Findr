@@ -19,12 +19,16 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search by keyword" translatesAutoresizingMaskIntoConstraints="NO" id="Dtr-Pb-ygh">
+                <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search by keyword" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dtr-Pb-ygh">
                     <rect key="frame" x="0.0" y="92" width="414" height="50"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="LXR-q0-B9W"/>
                     </constraints>
                     <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                    <scopeButtonTitles>
+                        <string>Title</string>
+                        <string>Title</string>
+                    </scopeButtonTitles>
                 </searchBar>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Whoops! There aren't any results that match your search. Try searching with a different keyword." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VBX-WH-ZZz">
                     <rect key="frame" x="40" y="428" width="334" height="40"/>
@@ -33,7 +37,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="xt8-Nc-RUo">
-                    <rect key="frame" x="16" y="152" width="382" height="724"/>
+                    <rect key="frame" x="16" y="152" width="382" height="744"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <collectionViewLayout key="collectionViewLayout" id="ilK-2D-NV4" customClass="ResultsLayout" customModule="Flickr_Findr" customModuleProvider="target"/>
                 </collectionView>
@@ -61,7 +65,7 @@
                 <constraint firstItem="VBX-WH-ZZz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="40" id="4fB-VV-REn"/>
                 <constraint firstItem="Dtr-Pb-ygh" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailing" id="DiN-wH-JGC"/>
                 <constraint firstItem="VBX-WH-ZZz" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="FZc-fE-h3H"/>
-                <constraint firstAttribute="bottom" secondItem="xt8-Nc-RUo" secondAttribute="bottom" constant="20" id="HCX-gj-raY"/>
+                <constraint firstAttribute="bottom" secondItem="xt8-Nc-RUo" secondAttribute="bottom" id="HCX-gj-raY"/>
                 <constraint firstItem="Qhu-43-gEO" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="MCR-EH-QkK"/>
                 <constraint firstItem="Dtr-Pb-ygh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dB9-Bc-Ojl"/>
                 <constraint firstAttribute="trailing" secondItem="xt8-Nc-RUo" secondAttribute="trailing" constant="16" id="hFc-9x-yO7"/>
