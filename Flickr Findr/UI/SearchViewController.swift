@@ -22,10 +22,10 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         return .lightContent
     }
     
-    var photos: [Photo] = [] {
+    var results: [SearchResult] = [] {
         didSet {
             resultsCollectionView.reloadData()
-            resultsCollectionView.isHidden = photos.isEmpty
+            resultsCollectionView.isHidden = results.isEmpty
         }
     }
     
@@ -78,7 +78,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         resultsCollectionView.delegate = self
         resultsCollectionView.dataSource = self
         
-        resultsCollectionView.register(cellType: PhotoCollectionViewCell.self)
+        resultsCollectionView.register(cellType: SearchResultCollectionViewCell.self)
         
         if let layout = resultsCollectionView.collectionViewLayout as? ResultsLayout {
          
@@ -93,7 +93,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         // Reset counts
         page = 1
         totalPages = 0
-        photos = []
+        results = []
         keyword = searchBar.text
         view.endEditing(true)
         scrollToTop()
@@ -103,14 +103,14 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return photos.count
+        return results.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: PhotoCollectionViewCell.self)
+        let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: SearchResultCollectionViewCell.self)
         
-        let nearEndOfResults = indexPath.item == photos.count - 1
+        let nearEndOfResults = indexPath.item == results.count - 1
         let moreResultsToFetch = totalPages > page
         if nearEndOfResults && moreResultsToFetch {
             
@@ -119,7 +119,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         }
                 
         cell.load(
-            result: photos[indexPath.item]
+            results[indexPath.item]
         )
         
         return cell
@@ -127,13 +127,13 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath) -> CGFloat {
         
-        return PhotoCollectionViewCell.defaultHeight
+        return SearchResultCollectionViewCell.defaultHeight
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         presentEnlargedPhoto(
-            photos[indexPath.item]
+            results[indexPath.item]
         )
     }
     
@@ -152,10 +152,10 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
             
             switch responseStatus {
                 
-            case .success(let photos, let totalPages):
-                DDLogDebug("Successfully fetched \(photos.count) photo results")
+            case .success(let results, let totalPages):
+                DDLogDebug("Successfully fetched \(results.count) photo results")
                 
-                self.photos += photos
+                self.results += results
                 self.page += 1
                 self.totalPages = totalPages
 
@@ -183,11 +183,11 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         resultsCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
     }
     
-    private func presentEnlargedPhoto(_ result: Photo) {
+    private func presentEnlargedPhoto(_ result: SearchResult) {
                     
         present(
             EnlargedPhotoViewController(
-                photo: result
+                result: result
             ),
             animated: true,
             completion: nil

@@ -18,14 +18,14 @@ class EnlargedPhotoViewController: UIViewController, BackgroundBlurable {
     
     // MARK: - Properties
     
-    private let photo: Photo
+    private let result: SearchResult
     private let radius: CGFloat = 10
     
     // MARK: - Init
     
-    init(photo: Photo) {
+    init(result: SearchResult) {
         
-        self.photo = photo
+        self.result = result
         
         super.init(nibName: String(describing: EnlargedPhotoViewController.self), bundle: nil)
     }
@@ -48,8 +48,8 @@ class EnlargedPhotoViewController: UIViewController, BackgroundBlurable {
         view.backgroundColor = .black
         applyBackgroundBlur()
         
-        imageView.sd_setImage(with: photo.imageURL)
-        titleLabel.text = photo.title
+        imageView.sd_setImage(with: result.imageURL)
+        titleLabel.text = result.title
         
         dismissButton.roundCorners(radius: radius)
         titleLabel.roundCorners(radius: radius)
