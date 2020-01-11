@@ -9,7 +9,13 @@
 import SDWebImage
 import MaterialComponents.MaterialSnackbar
 
-class SearchViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, ResultsLayoutDelegate, UISearchBarDelegate {
+protocol RecentSearchable: class {
+    
+    var recentSearches: [String] { get } // Limited to 5
+    func didSelectRecentSearch(_ recentSearch: String?)
+}
+
+class SearchViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, ResultsLayoutDelegate, UISearchBarDelegate, RecentSearchable {
     
     // MARK: - Outlets
     
@@ -37,6 +43,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     private var page = 1
     private var totalPages = 0
+    var recentSearches: [String] = []
     
     // MARK: - Init
     
@@ -88,6 +95,13 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     // MARK: - Search Bar Delegate
     
+    /*
+     Listen for search bar tap
+        if !recentSearches.isEmpty {
+            present recent searches vc
+        }
+     */
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         // Reset counts
@@ -110,14 +124,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         
         let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: SearchResultCollectionViewCell.self)
         
-        let nearEndOfResults = indexPath.item == results.count - 1
-        let moreResultsToFetch = totalPages > page
-        if nearEndOfResults && moreResultsToFetch {
-            
-            DDLogInfo("Nearing end of results; fetching more")
-            fetchPhotoResults()
-        }
-                
+        maybeFetchMoreResults(indexPath)
         cell.load(
             results[indexPath.item]
         )
@@ -141,7 +148,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
 
     private func fetchPhotoResults() {
         
-        guard let keyword = keyword else {
+        guard let keyword = keyword else { // TODO: add to or reorder recent searches
             DDLogDebug("Keyword unexpectedly nil")
             return
         }
@@ -165,6 +172,11 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         }
     }
     
+    func didSelectRecentSearch(_ recentSearch: String?) {
+        
+        keyword = recentSearch
+    }
+    
     // MARK: - Error Handling
     
     func showSnackBar(with messageText: String?) {
@@ -181,6 +193,17 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     private func scrollToTop() {
         
         resultsCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
+    }
+    
+    private func maybeFetchMoreResults(_ indexPath: IndexPath) {
+     
+        let nearEndOfResults = indexPath.item == results.count - 1
+        let moreResultsToFetch = totalPages > page
+        
+        guard nearEndOfResults && moreResultsToFetch else { return }
+            
+        DDLogInfo("Nearing end of results; fetching more")
+        fetchPhotoResults()
     }
     
     private func presentEnlargedPhoto(_ result: SearchResult) {
