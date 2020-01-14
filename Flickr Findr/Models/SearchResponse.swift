@@ -26,7 +26,6 @@ class SearchResponse: Decodable {
             let rawTotal = try container.decode(Int.self, forKey: .totalPages)
             self.totalPages = Int(rawTotal)
             self.results = try container.decode([SearchResult].self, forKey: .results)
-            
         }
     }
     

@@ -176,7 +176,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
             return
         }
         
-        updateRecentSearches(keyword)
+        updateRecentSearches(with: keyword)
         
         DDLogDebug("Attempting to fetch photos with keyword '\(keyword)'...")
         
@@ -261,7 +261,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         )
     }
     
-    private func updateRecentSearches(_ keyword: String) {
+    private func updateRecentSearches(with keyword: String) {
           
         guard keyword != Constants.defaultSearchTerm else { return }
         
