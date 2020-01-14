@@ -9,6 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchViewController" customModule="Flickr_Findr" customModuleProvider="target">
             <connections>
+                <outlet property="recentSearchesContainerView" destination="1Ha-lZ-EQK" id="EEt-q5-4tr"/>
                 <outlet property="resultsCollectionView" destination="xt8-Nc-RUo" id="hdZ-Bh-xxh"/>
                 <outlet property="searchBar" destination="Dtr-Pb-ygh" id="6SV-LK-1LR"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="I4C-Q0-zJj"/>
@@ -41,6 +42,13 @@
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <collectionViewLayout key="collectionViewLayout" id="ilK-2D-NV4" customClass="ResultsLayout" customModule="Flickr_Findr" customModuleProvider="target"/>
                 </collectionView>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Ha-lZ-EQK">
+                    <rect key="frame" x="0.0" y="142" width="414" height="250"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="250" id="1Qg-o7-7ys"/>
+                    </constraints>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qhu-43-gEO">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="82"/>
                     <subviews>
@@ -62,14 +70,17 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="xt8-Nc-RUo" firstAttribute="top" secondItem="Dtr-Pb-ygh" secondAttribute="bottom" constant="10" id="0ab-sP-jkk"/>
+                <constraint firstItem="1Ha-lZ-EQK" firstAttribute="top" secondItem="Dtr-Pb-ygh" secondAttribute="bottom" id="0hJ-eK-pWx"/>
                 <constraint firstItem="VBX-WH-ZZz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="40" id="4fB-VV-REn"/>
                 <constraint firstItem="Dtr-Pb-ygh" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailing" id="DiN-wH-JGC"/>
                 <constraint firstItem="VBX-WH-ZZz" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="FZc-fE-h3H"/>
                 <constraint firstAttribute="bottom" secondItem="xt8-Nc-RUo" secondAttribute="bottom" id="HCX-gj-raY"/>
                 <constraint firstItem="Qhu-43-gEO" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="MCR-EH-QkK"/>
+                <constraint firstItem="1Ha-lZ-EQK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="aTe-fg-MYH"/>
                 <constraint firstItem="Dtr-Pb-ygh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dB9-Bc-Ojl"/>
                 <constraint firstAttribute="trailing" secondItem="xt8-Nc-RUo" secondAttribute="trailing" constant="16" id="hFc-9x-yO7"/>
                 <constraint firstItem="xt8-Nc-RUo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="k2r-iO-W1x"/>
+                <constraint firstAttribute="trailing" secondItem="1Ha-lZ-EQK" secondAttribute="trailing" id="k9k-oa-vFd"/>
                 <constraint firstItem="Dtr-Pb-ygh" firstAttribute="top" secondItem="Qhu-43-gEO" secondAttribute="bottom" constant="10" id="ke0-Lc-Mtu"/>
                 <constraint firstItem="Qhu-43-gEO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="keU-dp-FmB"/>
                 <constraint firstAttribute="trailing" secondItem="Qhu-43-gEO" secondAttribute="trailing" id="qnt-fX-b5p"/>

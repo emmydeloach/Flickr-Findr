@@ -49,8 +49,13 @@ class RecentSearchesViewController: UIViewController, UITableViewDelegate, UITab
     
     // MARK: - Table View
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    
+        return Constants.recentSearchesHeaderText
+    }
         
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+                
         return delegate?.recentSearches.count ?? 0
     }
     

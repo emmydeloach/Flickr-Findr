@@ -45,7 +45,6 @@ class EnlargedPhotoViewController: UIViewController, BackgroundBlurable {
     
     private func setUpUI() {
         
-        view.backgroundColor = .black
         applyBackgroundBlur()
         
         imageView.sd_setImage(with: result.imageURL)

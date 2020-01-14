@@ -11,7 +11,7 @@ import MaterialComponents.MaterialSnackbar
 
 protocol RecentSearchable: class {
     
-    var recentSearches: [String] { get } // Limited to 5
+    var recentSearches: [String] { get }
     func didSelectRecentSearch(_ recentSearch: String?)
 }
 
@@ -21,6 +21,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var resultsCollectionView: UICollectionView!
+    @IBOutlet weak var recentSearchesContainerView: UIView!
     
     // MARK: - Properties
     
@@ -43,7 +44,14 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     private var page = 1
     private var totalPages = 0
-    var recentSearches: [String] = []
+    
+    private let recentSearchesMax = 5
+    private var recentSearchesViewController: RecentSearchesViewController?
+    var recentSearches: [String] = [] {
+        didSet {
+            recentSearchesViewController?.recentSearchesTableView.reloadData()
+        }
+    }
     
     // MARK: - Init
     
@@ -71,6 +79,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         
         setUpSearchBar()
         setUpCollectionView()
+        setUpRecentSearches()
         
         keyword = Constants.defaultSearchTerm
     }
@@ -78,6 +87,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     private func setUpSearchBar() {
         
         searchBar.delegate = self
+        searchBar.searchTextField.clearsOnBeginEditing = true
     }
     
     private func setUpCollectionView() {
@@ -93,27 +103,40 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         }
     }
     
+    private func setUpRecentSearches() {
+        
+        recentSearchesViewController = RecentSearchesViewController(delegate: self)
+        
+        guard let recentSearchesViewController = recentSearchesViewController else { return }
+        
+        recentSearchesContainerView.addSubview(recentSearchesViewController.view)
+        recentSearchesViewController.view.autoPinEdgesToSuperviewEdges()
+    }
+    
     // MARK: - Search Bar Delegate
     
-    /*
-     Listen for search bar tap
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        
         if !recentSearches.isEmpty {
-            present recent searches vc
+            
+            presentRecentSearches()
         }
-     */
+        
+        return true
+    }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
-        // Reset counts
-        page = 1
-        totalPages = 0
-        results = []
-        keyword = searchBar.text
-        view.endEditing(true)
-        scrollToTop()
+        performNewSearch()
     }
     
     // MARK: - Collection View Delegate
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        recentSearchesContainerView.isHidden = true
+        view.endEditing(true)
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
@@ -148,10 +171,12 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
 
     private func fetchPhotoResults() {
         
-        guard let keyword = keyword else { // TODO: add to or reorder recent searches
+        guard let keyword = keyword else {
             DDLogDebug("Keyword unexpectedly nil")
             return
         }
+        
+        updateRecentSearches(keyword)
         
         DDLogDebug("Attempting to fetch photos with keyword '\(keyword)'...")
         
@@ -172,9 +197,23 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         }
     }
     
+    private func performNewSearch() {
+        
+        // Reset counts
+        page = 1
+        totalPages = 0
+        results = []
+        keyword = searchBar.text
+
+        view.endEditing(true)
+        recentSearchesContainerView.isHidden = true
+        scrollToTop()
+    }
+    
     func didSelectRecentSearch(_ recentSearch: String?) {
         
-        keyword = recentSearch
+        searchBar.text = recentSearch
+        performNewSearch()
     }
     
     // MARK: - Error Handling
@@ -206,6 +245,11 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         fetchPhotoResults()
     }
     
+    private func presentRecentSearches() {
+        
+        recentSearchesContainerView.isHidden = false
+    }
+    
     private func presentEnlargedPhoto(_ result: SearchResult) {
                     
         present(
@@ -215,5 +259,24 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
             animated: true,
             completion: nil
         )
+    }
+    
+    private func updateRecentSearches(_ keyword: String) {
+          
+        guard keyword != Constants.defaultSearchTerm else { return }
+        
+        if recentSearches.contains(keyword), let index = recentSearches.firstIndex(of: keyword) {
+            
+            // Move to top if already in list
+            recentSearches.remove(at: index)
+        }
+        
+        recentSearches.insert(keyword, at: 0)
+        
+        if recentSearches.count == recentSearchesMax + 1 {
+            
+            // Trim if list has surpassed maximum
+            recentSearches.remove(at: recentSearchesMax - 1)
+        }
     }
 }
