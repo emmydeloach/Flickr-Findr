@@ -23,7 +23,9 @@ class SearchResultCollectionViewCell: UICollectionViewCell, NibReusable {
     func load(_ result: SearchResult) {
         
         imageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-        imageView.sd_setImage(with: result.imageURL) { _, _, _, _ in
+        imageView.sd_setImage(with: result.imageURL, placeholderImage: UIImage(named: Constants.errorIcon)) { image, _, _, _ in
+
+            self.imageView.contentMode = image != nil ? .scaleAspectFill : .scaleAspectFit
             
             self.titleLabel.text = result.title
         }
