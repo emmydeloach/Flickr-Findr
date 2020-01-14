@@ -11,4 +11,5 @@ struct Constants {
     static let defaultSearchTerm = "Iceland"
     static let errorMessage = "Oops! Something went wrong."
     static let recentSearchesHeaderText = "Recent Searches"
+    static let errorIcon = "error_icon.png"
 }

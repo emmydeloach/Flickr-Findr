@@ -47,7 +47,7 @@ class EnlargedPhotoViewController: UIViewController, BackgroundBlurable {
         
         applyBackgroundBlur()
         
-        imageView.sd_setImage(with: result.imageURL)
+        imageView.sd_setImage(with: result.imageURL, placeholderImage: UIImage(named: Constants.errorIcon))
         titleLabel.text = result.title
         
         dismissButton.roundCorners(radius: radius)
