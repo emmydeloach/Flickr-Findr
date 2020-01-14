@@ -9,12 +9,19 @@
 import SDWebImage
 import MaterialComponents.MaterialSnackbar
 
-class SearchViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, ResultsLayoutDelegate, UISearchBarDelegate {
+protocol RecentSearchable: class {
+    
+    var recentSearches: [String] { get }
+    func didSelectRecentSearch(_ recentSearch: String?)
+}
+
+class SearchViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, ResultsLayoutDelegate, UISearchBarDelegate, RecentSearchable {
     
     // MARK: - Outlets
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var resultsCollectionView: UICollectionView!
+    @IBOutlet weak var recentSearchesContainerView: UIView!
     
     // MARK: - Properties
     
@@ -22,10 +29,10 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         return .lightContent
     }
     
-    var photos: [Photo] = [] {
+    var results: [SearchResult] = [] {
         didSet {
             resultsCollectionView.reloadData()
-            resultsCollectionView.isHidden = photos.isEmpty
+            resultsCollectionView.isHidden = results.isEmpty
         }
     }
     
@@ -37,6 +44,14 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     private var page = 1
     private var totalPages = 0
+    
+    private let recentSearchesMax = 5
+    private var recentSearchesViewController: RecentSearchesViewController?
+    var recentSearches: [String] = [] {
+        didSet {
+            recentSearchesViewController?.recentSearchesTableView.reloadData()
+        }
+    }
     
     // MARK: - Init
     
@@ -64,6 +79,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         
         setUpSearchBar()
         setUpCollectionView()
+        setUpRecentSearches()
         
         keyword = Constants.defaultSearchTerm
     }
@@ -71,6 +87,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     private func setUpSearchBar() {
         
         searchBar.delegate = self
+        searchBar.searchTextField.clearsOnBeginEditing = true
     }
     
     private func setUpCollectionView() {
@@ -78,7 +95,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         resultsCollectionView.delegate = self
         resultsCollectionView.dataSource = self
         
-        resultsCollectionView.register(cellType: PhotoCollectionViewCell.self)
+        resultsCollectionView.register(cellType: SearchResultCollectionViewCell.self)
         
         if let layout = resultsCollectionView.collectionViewLayout as? ResultsLayout {
          
@@ -86,40 +103,53 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         }
     }
     
+    private func setUpRecentSearches() {
+        
+        recentSearchesViewController = RecentSearchesViewController(delegate: self)
+        
+        guard let recentSearchesViewController = recentSearchesViewController else { return }
+        
+        recentSearchesContainerView.addSubview(recentSearchesViewController.view)
+        recentSearchesViewController.view.autoPinEdgesToSuperviewEdges()
+    }
+    
     // MARK: - Search Bar Delegate
+    
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        
+        if !recentSearches.isEmpty {
+            
+            presentRecentSearches()
+        }
+        
+        return true
+    }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
-        // Reset counts
-        page = 1
-        totalPages = 0
-        photos = []
-        keyword = searchBar.text
-        view.endEditing(true)
-        scrollToTop()
+        performNewSearch()
     }
     
     // MARK: - Collection View Delegate
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        recentSearchesContainerView.isHidden = true
+        view.endEditing(true)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return photos.count
+        return results.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: PhotoCollectionViewCell.self)
+        let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: SearchResultCollectionViewCell.self)
         
-        let nearEndOfResults = indexPath.item == photos.count - 1
-        let moreResultsToFetch = totalPages > page
-        if nearEndOfResults && moreResultsToFetch {
-            
-            DDLogInfo("Nearing end of results; fetching more")
-            fetchPhotoResults()
-        }
-                
+        maybeFetchMoreResults(indexPath)
         cell.load(
-            result: photos[indexPath.item]
+            results[indexPath.item]
         )
         
         return cell
@@ -127,13 +157,13 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath) -> CGFloat {
         
-        return PhotoCollectionViewCell.defaultHeight
+        return SearchResultCollectionViewCell.defaultHeight
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         presentEnlargedPhoto(
-            photos[indexPath.item]
+            results[indexPath.item]
         )
     }
     
@@ -146,16 +176,18 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
             return
         }
         
+        updateRecentSearches(with: keyword)
+        
         DDLogDebug("Attempting to fetch photos with keyword '\(keyword)'...")
         
         APIService.fetchPhotos(with: keyword, page: page) { responseStatus in
             
             switch responseStatus {
                 
-            case .success(let photos, let totalPages):
-                DDLogDebug("Successfully fetched \(photos.count) photo results")
+            case .success(let results, let totalPages):
+                DDLogDebug("Successfully fetched \(results.count) photo results")
                 
-                self.photos += photos
+                self.results += results
                 self.page += 1
                 self.totalPages = totalPages
 
@@ -163,6 +195,25 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
                 self.showSnackBar(with: errorMessage)
             }
         }
+    }
+    
+    private func performNewSearch() {
+        
+        // Reset counts
+        page = 1
+        totalPages = 0
+        results = []
+        keyword = searchBar.text
+
+        view.endEditing(true)
+        recentSearchesContainerView.isHidden = true
+        scrollToTop()
+    }
+    
+    func didSelectRecentSearch(_ recentSearch: String?) {
+        
+        searchBar.text = recentSearch
+        performNewSearch()
     }
     
     // MARK: - Error Handling
@@ -183,14 +234,49 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         resultsCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
     }
     
-    private func presentEnlargedPhoto(_ result: Photo) {
+    private func maybeFetchMoreResults(_ indexPath: IndexPath) {
+     
+        let nearEndOfResults = indexPath.item == results.count - 1
+        let moreResultsToFetch = totalPages > page
+        
+        guard nearEndOfResults && moreResultsToFetch else { return }
+            
+        DDLogInfo("Nearing end of results; fetching more")
+        fetchPhotoResults()
+    }
+    
+    private func presentRecentSearches() {
+        
+        recentSearchesContainerView.isHidden = false
+    }
+    
+    private func presentEnlargedPhoto(_ result: SearchResult) {
                     
         present(
             EnlargedPhotoViewController(
-                photo: result
+                result: result
             ),
             animated: true,
             completion: nil
         )
+    }
+    
+    private func updateRecentSearches(with keyword: String) {
+          
+        guard keyword != Constants.defaultSearchTerm else { return }
+        
+        if recentSearches.contains(keyword), let index = recentSearches.firstIndex(of: keyword) {
+            
+            // Move to top if already in list
+            recentSearches.remove(at: index)
+        }
+        
+        recentSearches.insert(keyword, at: 0)
+        
+        if recentSearches.count == recentSearchesMax + 1 {
+            
+            // Trim if list has surpassed maximum
+            recentSearches.remove(at: recentSearchesMax - 1)
+        }
     }
 }

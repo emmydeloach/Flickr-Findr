@@ -10,7 +10,7 @@ import WebKit
 
 enum ResponseStatus {
     
-    case success([Photo], Int)
+    case success([SearchResult], Int)
     case error(String?)
 }
 
@@ -29,7 +29,7 @@ class APIService {
     
     // MARK: - Helper Methods
         
-    static func sendJSONRequest(to path: String, parameters: JSON, completion: @escaping ResponseHandler) {
+    static func sendRequest(to path: String, parameters: JSON, completion: @escaping ResponseHandler) {
             
         dataTask?.cancel()
             
@@ -60,19 +60,13 @@ class APIService {
                 }
 
                 do {
-                    if let json = try JSONSerialization.jsonObject(with: data, options:[]) as? JSON,
-                       let photosJSON = json[JSONKeys.Response.photos] as? JSON,
-                       let totalPages = photosJSON[JSONKeys.Response.pages] as? Int {
-                        
-                        let photos = Photo.parse(using: json)
-                        completion(.success(photos, totalPages))
-                    }
-                    else if let json = try JSONSerialization.jsonObject(with: data, options:[]) as? JSON,
-                        let errorMessage = json[JSONKeys.Response.message] as? String {
-                        DDLogDebug("Error from API: \(errorMessage)")
-                        completion(.error(errorMessage))
-                        return
-                    }
+                    let decodedResponse = try JSONDecoder().decode(SearchResponse.self, from: data)
+                    completion(
+                        .success(
+                            decodedResponse.results.results,
+                            decodedResponse.results.totalPages
+                        )
+                    )
                 } catch let parseError as NSError {
                     DDLogDebug("Error parsing JSON: \(parseError.localizedDescription)")
                     completion(.error(nil))
@@ -118,7 +112,7 @@ extension APIService {
             Keys.noJSONCallback: 1
         ]
         
-        sendJSONRequest(
+        sendRequest(
             to: Path.search,
             parameters: params,
             completion: completion
