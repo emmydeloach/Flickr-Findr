@@ -22,7 +22,6 @@
 		6FAADB8723BD3D200056A8A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FAADB8623BD3D200056A8A9 /* Assets.xcassets */; };
 		6FAADB9523BD3D200056A8A9 /* Flickr_FindrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FAADB9423BD3D200056A8A9 /* Flickr_FindrTests.swift */; };
 		6FAADBA023BD3F150056A8A9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FAADB9F23BD3F150056A8A9 /* LaunchScreen.xib */; };
-		6FAB13C723C4512E009CFCBF /* ResultsLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FAB13C623C4512D009CFCBF /* ResultsLayout.swift */; };
 		6FCCE9D723BD4BE900D75049 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCCE9D523BD4BE900D75049 /* SearchViewController.swift */; };
 		6FCCE9D823BD4BE900D75049 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FCCE9D623BD4BE900D75049 /* SearchViewController.xib */; };
 		6FCCE9DC23BD503900D75049 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCCE9DB23BD503900D75049 /* APIService.swift */; };
@@ -63,7 +62,6 @@
 		6FAADB9423BD3D200056A8A9 /* Flickr_FindrTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flickr_FindrTests.swift; sourceTree = "<group>"; };
 		6FAADB9623BD3D200056A8A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6FAADB9F23BD3F150056A8A9 /* LaunchScreen.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
-		6FAB13C623C4512D009CFCBF /* ResultsLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsLayout.swift; sourceTree = "<group>"; };
 		6FCCE9D523BD4BE900D75049 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		6FCCE9D623BD4BE900D75049 /* SearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
 		6FCCE9DB23BD503900D75049 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
@@ -110,7 +108,6 @@
 		6F20A6BD23C2A836002B8C43 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				6FAB13C623C4512D009CFCBF /* ResultsLayout.swift */,
 				6F2ABDE423C4C0AF00717A49 /* ViewRoundable.swift */,
 				6F2ABDE623C4CABC00717A49 /* BackgroundBlurrable.swift */,
 				6F2ABDE823C4E7B100717A49 /* Constants.swift */,
@@ -410,7 +407,6 @@
 				6F2ABDE723C4CABC00717A49 /* BackgroundBlurrable.swift in Sources */,
 				6FCCE9F923C1101000D75049 /* SearchResult.swift in Sources */,
 				6F679CF023C2A9A300622DF2 /* SearchResultCollectionViewCell.swift in Sources */,
-				6FAB13C723C4512E009CFCBF /* ResultsLayout.swift in Sources */,
 				6FCCE9D723BD4BE900D75049 /* SearchViewController.swift in Sources */,
 				6FCCE9DC23BD503900D75049 /* APIService.swift in Sources */,
 				6F2ABDE523C4C0AF00717A49 /* ViewRoundable.swift in Sources */,

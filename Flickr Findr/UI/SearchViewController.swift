@@ -15,7 +15,7 @@ protocol RecentSearchable: class {
     func didSelectRecentSearch(_ recentSearch: String?)
 }
 
-class SearchViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, ResultsLayoutDelegate, UISearchBarDelegate, RecentSearchable {
+class SearchViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UISearchBarDelegate, RecentSearchable {
     
     // MARK: - Outlets
     
@@ -23,6 +23,13 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     @IBOutlet weak var resultsCollectionView: UICollectionView!
     @IBOutlet weak var recentSearchesContainerView: UIView!
     
+    // MARK: - Constants
+
+    private let columnCount: CGFloat = 3
+    private let collectionViewBuffer: CGFloat = 32
+    
+    private let recentSearchesMax = 5
+
     // MARK: - Properties
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -45,7 +52,6 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     private var page = 1
     private var totalPages = 0
     
-    private let recentSearchesMax = 5
     private var recentSearchesViewController: RecentSearchesViewController?
     var recentSearches: [String] = [] {
         didSet {
@@ -96,11 +102,6 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         resultsCollectionView.dataSource = self
         
         resultsCollectionView.register(cellType: SearchResultCollectionViewCell.self)
-        
-        if let layout = resultsCollectionView.collectionViewLayout as? ResultsLayout {
-         
-            layout.delegate = self
-        }
     }
     
     private func setUpRecentSearches() {
@@ -130,7 +131,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         performNewSearch()
     }
     
-    // MARK: - Collection View Delegate
+    // MARK: - Collection View
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
@@ -155,15 +156,20 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath) -> CGFloat {
-        
-        return SearchResultCollectionViewCell.defaultHeight
-    }
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         presentEnlargedPhoto(
             results[indexPath.item]
+        )
+    }
+    
+    // MARK: - Layout
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+
+        return CGSize(
+            width: (collectionView.frame.size.width - collectionViewBuffer) / columnCount,
+            height: SearchResultCollectionViewCell.defaultHeight
         )
     }
     
