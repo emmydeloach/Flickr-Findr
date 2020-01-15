@@ -57,8 +57,6 @@ PODS:
   - MDFInternationalization (2.0.0)
   - MDFTextAccessibility (2.0.0)
   - MetovaTestKit (2.3.1)
-  - OHHTTPStubs (8.0.0):
-    - OHHTTPStubs/Default (= 8.0.0)
   - OHHTTPStubs/Core (8.0.0)
   - OHHTTPStubs/Default (8.0.0):
     - OHHTTPStubs/Core
@@ -87,7 +85,6 @@ DEPENDENCIES:
   - CocoaLumberjack/Swift
   - MaterialComponents/Snackbar
   - MetovaTestKit
-  - OHHTTPStubs
   - OHHTTPStubs/Swift
   - PureLayout
   - Reachability
@@ -119,6 +116,6 @@ SPEC CHECKSUMS:
   Reusable: 82be188f29d96dc5eff0db7b2393bcc08d2cdd5b
   SDWebImage: 29c340dbdcef342bb13125553f4e19ce056b07a7
 
-PODFILE CHECKSUM: a0652f339e79b9674a333028169661f2d0245d0e
+PODFILE CHECKSUM: c695a807f73f2cb2638ef59bfbac23cb6256e7a6
 
 COCOAPODS: 1.8.4
