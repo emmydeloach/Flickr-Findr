@@ -34,6 +34,8 @@
 		6FD4902B23CE4C970086D57F /* SearchResultCollectionViewCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD4902A23CE4C970086D57F /* SearchResultCollectionViewCellTests.swift */; };
 		6FD4903B23CEB4C20086D57F /* SearchResult+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD4903A23CEB4C20086D57F /* SearchResult+TestHelpers.swift */; };
 		6FD4903D23CEBA5C0086D57F /* EnlargedPhotoViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD4903C23CEBA5C0086D57F /* EnlargedPhotoViewControllerTests.swift */; };
+		6FD4903F23CEBDFA0086D57F /* RecentSearchesViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD4903E23CEBDF90086D57F /* RecentSearchesViewControllerTests.swift */; };
+		6FD4904123CEBF070086D57F /* MockRecentSearchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD4904023CEBF070086D57F /* MockRecentSearchable.swift */; };
 		E5DF9B970C79DB36D2537C8A /* Pods_Flickr_FindrTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1F2BCA9EF9A04BDC2FACFC /* Pods_Flickr_FindrTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +83,8 @@
 		6FD4902A23CE4C970086D57F /* SearchResultCollectionViewCellTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCollectionViewCellTests.swift; sourceTree = "<group>"; };
 		6FD4903A23CEB4C20086D57F /* SearchResult+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchResult+TestHelpers.swift"; sourceTree = "<group>"; };
 		6FD4903C23CEBA5C0086D57F /* EnlargedPhotoViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnlargedPhotoViewControllerTests.swift; sourceTree = "<group>"; };
+		6FD4903E23CEBDF90086D57F /* RecentSearchesViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchesViewControllerTests.swift; sourceTree = "<group>"; };
+		6FD4904023CEBF070086D57F /* MockRecentSearchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRecentSearchable.swift; sourceTree = "<group>"; };
 		6FD7CDD623C426EB00134709 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		7E25128C81721A7120A6E4DE /* Pods-Flickr Findr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flickr Findr.debug.xcconfig"; path = "Target Support Files/Pods-Flickr Findr/Pods-Flickr Findr.debug.xcconfig"; sourceTree = "<group>"; };
 		9D1F2BCA9EF9A04BDC2FACFC /* Pods_Flickr_FindrTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Flickr_FindrTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -166,7 +170,7 @@
 		6FAADB9323BD3D200056A8A9 /* Flickr FindrTests */ = {
 			isa = PBXGroup;
 			children = (
-				6FD4903923CEB4A70086D57F /* Test Setup */,
+				6FD4903923CEB4A70086D57F /* Test Utilities */,
 				6FD4902223CE200E0086D57F /* Network Mocking */,
 				6FD4902323CE201B0086D57F /* Tests */,
 				6FAADB9623BD3D200056A8A9 /* Info.plist */,
@@ -208,16 +212,18 @@
 				6FAADB9423BD3D200056A8A9 /* BaseTestCase.swift */,
 				6FD4902A23CE4C970086D57F /* SearchResultCollectionViewCellTests.swift */,
 				6FD4903C23CEBA5C0086D57F /* EnlargedPhotoViewControllerTests.swift */,
+				6FD4903E23CEBDF90086D57F /* RecentSearchesViewControllerTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
 		};
-		6FD4903923CEB4A70086D57F /* Test Setup */ = {
+		6FD4903923CEB4A70086D57F /* Test Utilities */ = {
 			isa = PBXGroup;
 			children = (
 				6FD4903A23CEB4C20086D57F /* SearchResult+TestHelpers.swift */,
+				6FD4904023CEBF070086D57F /* MockRecentSearchable.swift */,
 			);
-			path = "Test Setup";
+			path = "Test Utilities";
 			sourceTree = "<group>";
 		};
 		6FE66B8D23BD45A400316A0C /* UI */ = {
@@ -468,10 +474,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FD4903B23CEB4C20086D57F /* SearchResult+TestHelpers.swift in Sources */,
+				6FD4904123CEBF070086D57F /* MockRecentSearchable.swift in Sources */,
 				6FAADB9523BD3D200056A8A9 /* BaseTestCase.swift in Sources */,
 				6FD4903D23CEBA5C0086D57F /* EnlargedPhotoViewControllerTests.swift in Sources */,
 				6FD4902B23CE4C970086D57F /* SearchResultCollectionViewCellTests.swift in Sources */,
 				6FD4902523CE218F0086D57F /* NetworkMocker.swift in Sources */,
+				6FD4903F23CEBDFA0086D57F /* RecentSearchesViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
