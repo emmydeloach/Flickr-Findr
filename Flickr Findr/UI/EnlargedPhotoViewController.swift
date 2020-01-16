@@ -55,8 +55,6 @@ class EnlargedPhotoViewController: UIViewController, BackgroundBlurable {
         
         providesPresentationContextTransitionStyle = true
         definesPresentationContext = true
-        modalPresentationStyle = .popover
-        modalTransitionStyle = .coverVertical
     }
     
     // MARK: - Actions
