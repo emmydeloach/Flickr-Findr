@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -40,7 +41,7 @@
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="xt8-Nc-RUo">
                     <rect key="frame" x="16" y="152" width="382" height="744"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="6" minimumInteritemSpacing="6" id="c3t-CH-rp9">
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="6" id="c3t-CH-rp9">
                         <size key="itemSize" width="50" height="50"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -83,14 +84,15 @@
                 <constraint firstItem="Qhu-43-gEO" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="MCR-EH-QkK"/>
                 <constraint firstItem="1Ha-lZ-EQK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="aTe-fg-MYH"/>
                 <constraint firstItem="Dtr-Pb-ygh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dB9-Bc-Ojl"/>
-                <constraint firstAttribute="trailing" secondItem="xt8-Nc-RUo" secondAttribute="trailing" constant="16" id="hFc-9x-yO7"/>
-                <constraint firstItem="xt8-Nc-RUo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="k2r-iO-W1x"/>
+                <constraint firstItem="eqv-K0-0KM" firstAttribute="trailing" secondItem="xt8-Nc-RUo" secondAttribute="trailing" constant="16" id="hFc-9x-yO7"/>
+                <constraint firstItem="xt8-Nc-RUo" firstAttribute="leading" secondItem="eqv-K0-0KM" secondAttribute="leading" constant="16" id="k2r-iO-W1x"/>
                 <constraint firstAttribute="trailing" secondItem="1Ha-lZ-EQK" secondAttribute="trailing" id="k9k-oa-vFd"/>
                 <constraint firstItem="Dtr-Pb-ygh" firstAttribute="top" secondItem="Qhu-43-gEO" secondAttribute="bottom" constant="10" id="ke0-Lc-Mtu"/>
                 <constraint firstItem="Qhu-43-gEO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="keU-dp-FmB"/>
                 <constraint firstAttribute="trailing" secondItem="Qhu-43-gEO" secondAttribute="trailing" id="qnt-fX-b5p"/>
                 <constraint firstAttribute="trailing" secondItem="VBX-WH-ZZz" secondAttribute="trailing" constant="40" id="xcA-CQ-aIm"/>
             </constraints>
+            <viewLayoutGuide key="safeArea" id="eqv-K0-0KM"/>
             <point key="canvasLocation" x="139" y="136"/>
         </view>
     </objects>

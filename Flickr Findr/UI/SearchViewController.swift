@@ -15,6 +15,19 @@ protocol RecentSearchable: class {
     func didSelectRecentSearch(_ recentSearch: String?)
 }
 
+enum Orientation {
+    
+    case portrait
+    case landscape
+    
+    var columnCount: Int {
+        switch self {
+        case .portrait: return 3
+        case .landscape: return 8
+        }
+    }
+}
+
 class SearchViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UISearchBarDelegate, RecentSearchable {
     
     // MARK: - Outlets
@@ -24,14 +37,12 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     @IBOutlet weak var recentSearchesContainerView: UIView!
     
     // MARK: - Constants
-
-    private let columnCount: CGFloat = 3
-    private let collectionViewBuffer: CGFloat = 32
     
     private let recentSearchesMax = 5
 
     // MARK: - Properties
     
+    var orientation: Orientation = .portrait
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -77,6 +88,16 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         super.viewDidLoad()
         
         setUpUI()
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        coordinator.animate(alongsideTransition: nil) { _ in
+            
+            self.updateLayoutsForOrientationChange(newOrientation: UIDevice.current.orientation)
+        }
     }
     
     // MARK: - Setup
@@ -166,9 +187,13 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     // MARK: - Layout
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let floatColumnCount = CGFloat(orientation.columnCount)
+        let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout
+        let buffer = (flowLayout?.minimumInteritemSpacing ?? 0) * (floatColumnCount - 1)
 
         return CGSize(
-            width: (collectionView.frame.size.width - collectionViewBuffer) / columnCount,
+            width: (collectionView.frame.size.width - buffer) / floatColumnCount,
             height: SearchResultCollectionViewCell.defaultHeight
         )
     }
@@ -234,6 +259,20 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     // MARK: - Helpers
+    
+    private func updateLayoutsForOrientationChange(newOrientation: UIDeviceOrientation) {
+        
+        resultsCollectionView.collectionViewLayout.invalidateLayout()
+        
+        switch newOrientation {
+        case .portrait:
+            orientation = .portrait
+        case .landscapeLeft, .landscapeRight:
+            orientation = .landscape
+        default:
+            DDLogError("Attempting to update layout for unknown orientation")
+        }
+    }
     
     private func scrollToTop() {
         
