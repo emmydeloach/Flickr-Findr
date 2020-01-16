@@ -1,5 +1,5 @@
 //
-//  PhotoCollectionViewCell.swift
+//  SearchResultCollectionViewCell.swift
 //  Flickr Findr
 //
 //  Created by Emmy DeLoach on 1/5/20.
@@ -9,7 +9,7 @@
 import Reusable
 import SDWebImage
 
-class PhotoCollectionViewCell: UICollectionViewCell, NibReusable {
+class SearchResultCollectionViewCell: UICollectionViewCell, NibReusable {
 
     static let defaultHeight: CGFloat = 180
     
@@ -20,10 +20,15 @@ class PhotoCollectionViewCell: UICollectionViewCell, NibReusable {
 
     // MARK: - Setup
     
-    func load(result: Photo) {
+    func load(_ result: SearchResult) {
         
         imageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-        imageView.sd_setImage(with: result.imageURL) { _, _, _, _ in
+        imageView.sd_setImage(with: result.imageURL) { _, error, _, _ in
+
+            if error != nil {
+                // Using `placeholderImage` causes scaling issues
+                self.imageView.image = UIImage(named: Constants.errorIcon)
+            }
             
             self.titleLabel.text = result.title
         }

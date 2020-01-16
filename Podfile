@@ -17,6 +17,5 @@ target 'Flickr Findr' do
 
     pod 'MetovaTestKit'
     pod 'OHHTTPStubs/Swift'
-    pod 'OHHTTPStubs'
   end
 end

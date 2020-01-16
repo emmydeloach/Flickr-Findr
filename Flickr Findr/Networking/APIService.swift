@@ -10,7 +10,7 @@ import WebKit
 
 enum ResponseStatus {
     
-    case success([Photo], Int)
+    case success([SearchResult], Int)
     case error(String?)
 }
 
@@ -27,9 +27,13 @@ class APIService {
     private static let defaultSession = URLSession.shared
     private static var dataTask: URLSessionDataTask?
     
+    private static let format = "json"
+    private static let jsonCallback = 1
+    private static let pageCount = 25
+    
     // MARK: - Helper Methods
         
-    static func sendJSONRequest(to path: String, parameters: JSON, completion: @escaping ResponseHandler) {
+    static func sendRequest(to path: String, parameters: JSON, completion: @escaping ResponseHandler) {
             
         dataTask?.cancel()
             
@@ -60,19 +64,13 @@ class APIService {
                 }
 
                 do {
-                    if let json = try JSONSerialization.jsonObject(with: data, options:[]) as? JSON,
-                       let photosJSON = json[JSONKeys.Response.photos] as? JSON,
-                       let totalPages = photosJSON[JSONKeys.Response.pages] as? Int {
-                        
-                        let photos = Photo.parse(using: json)
-                        completion(.success(photos, totalPages))
-                    }
-                    else if let json = try JSONSerialization.jsonObject(with: data, options:[]) as? JSON,
-                        let errorMessage = json[JSONKeys.Response.message] as? String {
-                        DDLogDebug("Error from API: \(errorMessage)")
-                        completion(.error(errorMessage))
-                        return
-                    }
+                    let decodedResponse = try JSONDecoder().decode(SearchResponse.self, from: data)
+                    completion(
+                        .success(
+                            decodedResponse.results.results,
+                            decodedResponse.results.totalPages
+                        )
+                    )
                 } catch let parseError as NSError {
                     DDLogDebug("Error parsing JSON: \(parseError.localizedDescription)")
                     completion(.error(nil))
@@ -111,14 +109,14 @@ extension APIService {
     static func fetchPhotos(with keyword: String, page: Int, completion: @escaping ResponseHandler) {
 
         let params: JSON = [
-            Keys.text: keyword,
-            Keys.perPage: 25,
+            Keys.format: format,
+            Keys.noJSONCallback: jsonCallback,
+            Keys.perPage: pageCount,
             Keys.page: page,
-            Keys.format: "json",
-            Keys.noJSONCallback: 1
+            Keys.text: keyword
         ]
         
-        sendJSONRequest(
+        sendRequest(
             to: Path.search,
             parameters: params,
             completion: completion
