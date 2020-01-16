@@ -11,6 +11,14 @@ import OHHTTPStubs
 
 @testable import Flickr_Findr
 
+enum HTTPMethod: String {
+    
+    case get = "GET"
+    case post = "POST"
+    case delete = "DELETE"
+    case put = "PUT"
+}
+
 class NetworkMocker {
     
     enum ResponseStatus {
@@ -33,25 +41,54 @@ class NetworkMocker {
         }
     }
     
-    static func stub(status: ResponseStatus) {
+    static func stub(path: String, method: HTTPMethod, status: ResponseStatus) {
         
-        guard let stubPath = OHPathForFileInBundle(status.jsonFilePath, Bundle(for: self)) else {
-            DDLogWarn("Network mocker file path unexpectedly nil")
-            return
-        }
-
-        OHHTTPStubs.stubRequests(passingTest: isHost(Path.search)) { _ in
-
-            return OHHTTPStubsResponse(
-                fileAtPath: stubPath,
+        let stubSignature = RequestSignature(path: path, method: method)
+        let testBlock = compareRequestSignatures(stubSignature)
+                
+        OHHTTPStubs.stubRequests(passingTest: testBlock) { _ in
+                        
+            let response = OHHTTPStubsResponse(
+                fileAtPath: attemptToGetFilePath(withFilename: status.jsonFilePath),
                 statusCode: status.code,
-                headers: ["Content-Type":"application/json"]
+                headers: [:]
             )
+            
+            response.responseTime = 0.1
+            return response
         }
+    }
+    
+    // MARK: - General Add/Remove All
+    
+    static func stubAllRequests() {
+        
+        stubSearchWithSuccess()
     }
     
     static func removeAllStubs() {
         
         OHHTTPStubs.removeAllStubs()
+    }
+    
+    // MARK: - Helpers
+    
+    static private func attemptToGetFilePath(withFilename filename: String) -> String {
+        
+        guard let filePath = OHPathForFileInBundle(filename, Bundle(for: self)) else {
+            fatalError("File with filename not found: \(filename)")
+        }
+        
+        return filePath
+    }
+    
+    static private func compareRequestSignatures(_ stubSignature: RequestSignature) -> OHHTTPStubsTestBlock {
+        
+        return { request in
+            
+            let requestSignature = RequestSignature(request: request)
+            
+            return requestSignature == stubSignature
+        }
     }
 }

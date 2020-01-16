@@ -8,7 +8,8 @@
 
 struct Path {
  
-    static let baseURL = "https://www.flickr.com/services/rest/"    
+    static let baseURL = "https://www.flickr.com\(basePath)/"
+    static let basePath = "/services/rest"
     static let search = "flickr.photos.search"
     
     static func imagePath(photoID: String?, serverID: String?, farmID: Int?, secret: String?) -> String {

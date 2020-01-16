@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import MaterialComponents.MaterialSnackbar
 
 @testable import Flickr_Findr
 
@@ -18,7 +19,7 @@ class BaseTestCase: XCTestCase {
 
         super.setUp()
         
-        NetworkMocker.stub(status: .success)
+        NetworkMocker.stubAllRequests()
     }
 
     override func tearDown() {
@@ -41,5 +42,15 @@ class BaseTestCase: XCTestCase {
             XCTFail("Image \(image1) is not equal to \(image2)", file: file, line: line)
             return
         }
+    }
+    
+    func verifySnackBarPresented(file: StaticString = #file, line: UInt = #line) {
+        
+        let expectation = self.expectation(description: "Should show error snackbar")
+        
+        XCTAssertTrue(MDCSnackbarManager.hasMessagesShowingOrQueued(), file: file, line: line)
+        expectation.fulfill()
+        
+        waitForExpectations(timeout: 1, handler: nil)
     }
 }

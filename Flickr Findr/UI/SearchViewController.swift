@@ -49,8 +49,8 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         }
     }
     
-    private var page = 1
-    private var totalPages = 0
+    var page = 1
+    var totalPages = 0
     
     private var recentSearchesViewController: RecentSearchesViewController?
     var recentSearches: [String] = [] {
@@ -282,7 +282,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         if recentSearches.count == recentSearchesMax + 1 {
             
             // Trim if list has surpassed maximum
-            recentSearches.remove(at: recentSearchesMax - 1)
+            recentSearches.remove(at: recentSearchesMax)
         }
     }
 }

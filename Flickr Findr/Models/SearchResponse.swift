@@ -23,8 +23,7 @@ class SearchResponse: Decodable {
             
             let container = try decoder.container(keyedBy: CodingKeys.self)
 
-            let rawTotal = try container.decode(Int.self, forKey: .totalPages)
-            self.totalPages = Int(rawTotal)
+            self.totalPages = try container.decode(Int.self, forKey: .totalPages)
             self.results = try container.decode([SearchResult].self, forKey: .results)
         }
     }

@@ -27,6 +27,10 @@ class APIService {
     private static let defaultSession = URLSession.shared
     private static var dataTask: URLSessionDataTask?
     
+    private static let format = "json"
+    private static let jsonCallback = 1
+    private static let pageCount = 25
+    
     // MARK: - Helper Methods
         
     static func sendRequest(to path: String, parameters: JSON, completion: @escaping ResponseHandler) {
@@ -105,11 +109,11 @@ extension APIService {
     static func fetchPhotos(with keyword: String, page: Int, completion: @escaping ResponseHandler) {
 
         let params: JSON = [
-            Keys.text: keyword,
-            Keys.perPage: 25,
+            Keys.format: format,
+            Keys.noJSONCallback: jsonCallback,
+            Keys.perPage: pageCount,
             Keys.page: page,
-            Keys.format: "json",
-            Keys.noJSONCallback: 1
+            Keys.text: keyword
         ]
         
         sendRequest(
