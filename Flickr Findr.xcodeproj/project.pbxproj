@@ -20,6 +20,7 @@
 		6F679CF123C2A9A300622DF2 /* SearchResultCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F679CEF23C2A9A300622DF2 /* SearchResultCollectionViewCell.xib */; };
 		6F6D005A23D01D7E00BA5197 /* RequestSignature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6D005923D01D7E00BA5197 /* RequestSignature.swift */; };
 		6F6D005C23D01D9700BA5197 /* NetworkMocker+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6D005B23D01D9700BA5197 /* NetworkMocker+Search.swift */; };
+		6F6D005E23D02B1500BA5197 /* SearchResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6D005D23D02B1500BA5197 /* SearchResultTests.swift */; };
 		6FAADB7E23BD3D1E0056A8A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FAADB7D23BD3D1E0056A8A9 /* AppDelegate.swift */; };
 		6FAADB8723BD3D200056A8A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FAADB8623BD3D200056A8A9 /* Assets.xcassets */; };
 		6FAADB9523BD3D200056A8A9 /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FAADB9423BD3D200056A8A9 /* BaseTestCase.swift */; };
@@ -67,6 +68,7 @@
 		6F679CEF23C2A9A300622DF2 /* SearchResultCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchResultCollectionViewCell.xib; sourceTree = "<group>"; };
 		6F6D005923D01D7E00BA5197 /* RequestSignature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestSignature.swift; sourceTree = "<group>"; };
 		6F6D005B23D01D9700BA5197 /* NetworkMocker+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NetworkMocker+Search.swift"; sourceTree = "<group>"; };
+		6F6D005D23D02B1500BA5197 /* SearchResultTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTests.swift; sourceTree = "<group>"; };
 		6FAADB7A23BD3D1E0056A8A9 /* Flickr Findr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Flickr Findr.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FAADB7D23BD3D1E0056A8A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6FAADB8623BD3D200056A8A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				6FD4903E23CEBDF90086D57F /* RecentSearchesViewControllerTests.swift */,
 				6FD4904223CEC69E0086D57F /* SearchViewControllerTests.swift */,
 				6FD4902A23CE4C970086D57F /* SearchResultCollectionViewCellTests.swift */,
+				6F6D005D23D02B1500BA5197 /* SearchResultTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -484,6 +487,7 @@
 			files = (
 				6FD4903B23CEB4C20086D57F /* SearchResult+TestHelpers.swift in Sources */,
 				6F6D005A23D01D7E00BA5197 /* RequestSignature.swift in Sources */,
+				6F6D005E23D02B1500BA5197 /* SearchResultTests.swift in Sources */,
 				6FD4904123CEBF070086D57F /* MockRecentSearchable.swift in Sources */,
 				6F6D005C23D01D9700BA5197 /* NetworkMocker+Search.swift in Sources */,
 				6FD4904323CEC69F0086D57F /* SearchViewControllerTests.swift in Sources */,

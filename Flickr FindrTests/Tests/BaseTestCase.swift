@@ -31,6 +31,8 @@ class BaseTestCase: XCTestCase {
     
     // MARK: - Helpers
     
+    // MARK: Assertions
+    
     func assertEqualImages(_ image1: UIImage?, _ image2: UIImage?, file: StaticString = #file, line: UInt = #line) {
         
         guard let image1 = image1, let image2 = image2, let data1 = image1.pngData(), let data2 = image2.pngData() else {
@@ -44,6 +46,8 @@ class BaseTestCase: XCTestCase {
         }
     }
     
+    // MARK: Snack Bar
+    
     func verifySnackBarPresented(file: StaticString = #file, line: UInt = #line) {
         
         let expectation = self.expectation(description: "Should show error snackbar")
@@ -52,5 +56,22 @@ class BaseTestCase: XCTestCase {
         expectation.fulfill()
         
         waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    // MARK: Loading JSON From Files
+    
+    func loadDataFromFile(named filename: String, file: StaticString = #file, line: UInt = #line) -> Data? {
+
+        guard let pathString = Bundle(for: type(of: self)).path(forResource: filename, ofType: "json") else {
+            XCTFail("\(filename).json not found")
+            return nil
+        }
+
+        guard let jsonString = try? String(contentsOfFile: pathString, encoding: .utf8) else {
+            XCTFail("Unable to convert \(filename).json to String")
+            return nil
+        }
+
+        return jsonString.data(using: .utf8)
     }
 }
