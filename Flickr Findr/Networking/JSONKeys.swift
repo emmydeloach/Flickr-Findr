@@ -18,24 +18,4 @@ struct JSONKeys {
         static let format = "format"
         static let noJSONCallback = "nojsoncallback"
     }
-    
-    struct Response {
-        
-        static let photos = "photos"
-        static let page = "page"
-        static let pages = "pages"
-        static let perPage = "perpage"
-        static let photoResults = "photo"
-        static let status = "stat"
-        static let message = "message"
-        
-        struct Photo {
-
-            static let title = "title"
-            static let id = "id"
-            static let serverID = "server"
-            static let farmID = "farm"
-            static let secret = "secret"
-        }
-    }
 }
